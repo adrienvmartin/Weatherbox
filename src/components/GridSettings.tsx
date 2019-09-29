@@ -1,17 +1,22 @@
-import React from "react";
+import React, { Fragment } from "react";
+import MetricSwitch from "./MetricSwitch";
+import ColourSettings from "./ColourSettings";
+import { TempColours, PrecipColours } from "../constants";
 
 interface IGridSettingsState {
   metric: boolean;
   collapsed: boolean;
   open: boolean;
   singleLine: boolean;
-  precipColour: string;
-  rainColour: string;
-  snowColour: string;
+  tempColour: TempColours;
+  precipColour: PrecipColours;
+  rainColour: PrecipColours;
+  snowColour: PrecipColours;
   unitPrecipDays: string;
   unitRainDays: string;
   unitSnowDays: string;
   humidityColour: string;
+  calculateAvg: boolean;
 }
 
 export const INITIAL_STATE: IGridSettingsState = {
@@ -19,16 +24,56 @@ export const INITIAL_STATE: IGridSettingsState = {
   collapsed: false,
   open: false,
   singleLine: true,
-  precipColour: 'blue',
-  rainColour: 'blue',
-  snowColour: 'blue',
-  unitPrecipDays: '0.2mm',
-  unitRainDays: '0.2mm',
-  unitSnowDays: '0.2cm',
-  humidityColour: 'blue',
+  tempColour: TempColours.STANDARD,
+  precipColour: PrecipColours.BLUE,
+  rainColour: PrecipColours.BLUE,
+  snowColour: PrecipColours.BLUE,
+  unitPrecipDays: "0.2mm",
+  unitRainDays: "0.2mm",
+  unitSnowDays: "0.2cm",
+  humidityColour: "blue",
+  calculateAvg: true
 };
 
 export class GridSettings extends React.Component<IGridSettingsState> {
   public state: IGridSettingsState = INITIAL_STATE;
 
-};
+  public onChange = e => {
+    this.setState(state => ({
+      ...state,
+      [e.target.name]: e.target.value
+    }));
+  };
+
+  public render() {
+    const {
+      metric,
+      // collapsed,
+      // open,
+      // singleLine,
+      tempColour,
+      precipColour,
+      rainColour,
+      snowColour,
+      // unitPrecipDays,
+      // unitRainDays,
+      // unitSnowDays,
+      // humidityColour,
+      // calculateAvg
+    } = this.state;
+    return (
+      <Fragment>
+        <MetricSwitch metric={metric} onChange={this.onChange} />
+        <ColourSettings
+          tempColour={tempColour}
+          precipColour={precipColour}
+          rainColour={rainColour}
+          snowColour={snowColour}
+          onChange={this.onChange}
+        />
+      </Fragment>
+    );
+  }
+}
+
+export default GridSettings;

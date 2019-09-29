@@ -1,7 +1,21 @@
 import React from "react";
-import { Radio, RadioGroup } from "@material-ui/core";
 
-export const INITIAL_STATE = {
+interface IGridSettingsState {
+  metric: boolean;
+  collapsed: boolean;
+  open: boolean;
+  singleLine: boolean;
+  location: string;
+  precipColour: string;
+  rainColour: string;
+  snowColour: string;
+  unitPrecipDays: string;
+  unitRainDays: string;
+  unitSnowDays: string;
+  humidityColour: string;
+}
+
+const INITIAL_STATE: IGridSettingsState = {
   metric: true,
   collapsed: false,
   open: false,
@@ -16,7 +30,7 @@ export const INITIAL_STATE = {
   humidityColour: 'blue',
 };
 
-export class MetricSwitch extends React.Component {
-  public state: true;
+export class GridSettings extends React.Component<IGridSettingsState> {
+  public state: IGridSettingsState = INITIAL_STATE;
 
 };

@@ -5,7 +5,6 @@ interface IGridSettingsState {
   collapsed: boolean;
   open: boolean;
   singleLine: boolean;
-  location: string;
   precipColour: string;
   rainColour: string;
   snowColour: string;
@@ -20,7 +19,6 @@ export const INITIAL_STATE: IGridSettingsState = {
   collapsed: false,
   open: false,
   singleLine: true,
-  location: '',
   precipColour: 'blue',
   rainColour: 'blue',
   snowColour: 'blue',

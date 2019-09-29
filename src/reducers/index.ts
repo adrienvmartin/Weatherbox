@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import data from './dataReducer';
+import settings from './settings';
 
 const appReducer = combineReducers({
-  data
+  data,
+  settings
 });
 
 export default appReducer;

@@ -15,7 +15,7 @@ interface IGridSettingsState {
   humidityColour: string;
 }
 
-const INITIAL_STATE: IGridSettingsState = {
+export const INITIAL_STATE: IGridSettingsState = {
   metric: true,
   collapsed: false,
   open: false,

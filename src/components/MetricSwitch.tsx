@@ -1,22 +1,35 @@
-import React from 'react';
-import { Radio, RadioGroup } from "@material-ui/core";
+import React, { Fragment } from "react";
+import {
+  Radio,
+  RadioGroup,
+  FormControl,
+  FormLabel,
+  FormControlLabel
+} from "@material-ui/core";
 
 interface IProps {
   metric: boolean;
+  onChange: (e: any) => void;
 }
 
-interface IState {
-  metric: boolean;
-}
+const MetricSwitch: React.FC<IProps> = (props) => {
+  const { metric, onChange } = props;
+  return (
+    <Fragment>
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Metric?</FormLabel>
+        <RadioGroup
+          aria-label="metric"
+          name="metric"
+          value={metric}
+          onChange={onChange}
+        >
+          <FormControlLabel value="C" control={<Radio />} label="Celsius" />
+          <FormControlLabel value="F" control={<Radio />} label="Fahrenheit" />
+        </RadioGroup>
+      </FormControl>
+    </Fragment>
+  )
+};
 
-export class MetricSwitch extends React.Component<IProps, IState> {
-  public state: IState ={
-    metric: true
-  };
-
-  private onChange = (e) => {
-    this.setState({
-      metric: e.target.value,
-    });
-  }
-}
+export default MetricSwitch;

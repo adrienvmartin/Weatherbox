@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import {
   Radio,
   RadioGroup,
@@ -7,16 +7,26 @@ import {
   FormControlLabel
 } from "@material-ui/core";
 
-interface IProps {
-  metric: boolean;
-  open: boolean;
-  collapsed: boolean;
-  singleLine: boolean;
-  onChange: (e: any) => void;
+interface ISwitches {
+  metric: string;
+  open: string;
+  collapsed: string;
+  singleLine: string;
 }
 
-const Switches: React.FC<IProps> = (props) => {
-  const { metric, onChange, collapsed, open, singleLine } = props;
+const initial = {
+  metric: 'true',
+  open: 'false',
+  collapsed: 'false',
+  singleLine: 'true'
+};
+
+const Switches: React.FC = () => {
+  const [switches, setSwitches] = useState<ISwitches>(initial);
+  const { metric, collapsed, open, singleLine } = switches;
+  const onChange = e => {
+    setSwitches({ ...switches, [e.target.name]: e.target.value });
+  };
   return (
     <Fragment>
       <h1>Switches</h1>
@@ -28,8 +38,12 @@ const Switches: React.FC<IProps> = (props) => {
           value={metric}
           onChange={onChange}
         >
-          <FormControlLabel value={true} control={<Radio />} label="Celsius" />
-          <FormControlLabel value={false} control={<Radio />} label="Fahrenheit" />
+          <FormControlLabel value={'true'} control={<Radio />} label="Celsius" />
+          <FormControlLabel
+            value={'false'}
+            control={<Radio />}
+            label="Fahrenheit"
+          />
         </RadioGroup>
       </FormControl>
       <br />
@@ -41,11 +55,11 @@ const Switches: React.FC<IProps> = (props) => {
           value={open}
           onChange={onChange}
         >
-          <FormControlLabel value={true} control={<Radio />} label="Yes" />
-          <FormControlLabel value={false} control={<Radio />} label="No" />
+          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
+          <FormControlLabel value={'false'} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
-      <br/>
+      <br />
       <FormControl component="fieldset">
         <FormLabel component="legend">Collapsed?</FormLabel>
         <RadioGroup
@@ -54,8 +68,8 @@ const Switches: React.FC<IProps> = (props) => {
           value={collapsed}
           onChange={onChange}
         >
-          <FormControlLabel value={true} control={<Radio />} label="Yes" />
-          <FormControlLabel value={false} control={<Radio />} label="No" />
+          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
+          <FormControlLabel value={'false'} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
       <br />
@@ -63,16 +77,16 @@ const Switches: React.FC<IProps> = (props) => {
         <FormLabel component="legend">Single Line?</FormLabel>
         <RadioGroup
           aria-label="single-line"
-          name="single-line"
+          name="singleLine"
           value={singleLine}
           onChange={onChange}
         >
-          <FormControlLabel value={true} control={<Radio />} label="Yes" />
-          <FormControlLabel value={false} control={<Radio />} label="No" />
+          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
+          <FormControlLabel value={'false'} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
     </Fragment>
-  )
+  );
 };
 
 export default Switches;

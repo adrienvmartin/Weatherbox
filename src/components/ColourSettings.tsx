@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { PrecipColours, TempColours } from "../constants";
 import {
   Radio,
@@ -8,7 +8,7 @@ import {
   FormControlLabel
 } from "@material-ui/core";
 
-interface IProps {
+interface IColours {
   onChange: (e) => void;
   tempColour: string;
   precipColour: string;
@@ -16,10 +16,20 @@ interface IProps {
   snowColour: string;
 }
 
-const ColourSettings: React.FC<IProps> = props => {
-  const { onChange, tempColour, precipColour, rainColour, snowColour } = props;
+const initial = {
+  tempColour: 'standard',
+  precipColour: 'blue',
+  rainColour: 'blue',
+  snowColour: 'blue',
+  onChange: () => {},
+};
+
+const ColourSettings: React.FC = () => {
   const { BLUE, GREEN, NONE } = PrecipColours;
   const { PASTEL, STANDARD } = TempColours;
+  const [colour, setColour] = useState<IColours>(initial);
+  const { tempColour, precipColour, rainColour, snowColour } = colour;
+  const onChange = e => setColour({ ...colour, [e.target.name]: e.target.value });
   return (
     <Fragment>
       <h1>Colours</h1>
@@ -28,7 +38,7 @@ const ColourSettings: React.FC<IProps> = props => {
         <FormLabel>Temperature</FormLabel>
         <RadioGroup
           aria-label="Temperature Colour"
-          name="temp-color"
+          name="tempColour"
           value={tempColour}
           onChange={onChange}
         >
@@ -41,7 +51,7 @@ const ColourSettings: React.FC<IProps> = props => {
         <FormLabel>Precipitation</FormLabel>
         <RadioGroup
           aria-label="Precipitation Colour"
-          name="precip-settings"
+          name="precipColour"
           value={precipColour}
           onChange={onChange}
         >
@@ -55,7 +65,7 @@ const ColourSettings: React.FC<IProps> = props => {
         <FormLabel>Rain</FormLabel>
         <RadioGroup
           aria-label="Rain Colour"
-          name="rain-color"
+          name="rainColour"
           value={rainColour}
           onChange={onChange}
         >
@@ -68,7 +78,7 @@ const ColourSettings: React.FC<IProps> = props => {
         <FormLabel>Snow</FormLabel>
         <RadioGroup
           aria-label="Snow Colour"
-          name="snow-color"
+          name="snowColour"
           value={snowColour}
           onChange={onChange}
         >

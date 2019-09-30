@@ -1,15 +1,22 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import { TextField } from '@material-ui/core';
 
-interface IProps {
+interface IUnits {
   precipDays: string;
   rainDays: string;
   snowDays: string;
-  onChange: (e) => void;
 }
 
-const UnitDays: React.FC<IProps> = props => {
-  const { precipDays, rainDays, snowDays, onChange } = props;
+const initial = {
+  precipDays: '0.2mm',
+  rainDays: '0.2mm',
+  snowDays: '0.2cm',
+};
+
+const UnitDays: React.FC = () => {
+  const [units, setUnits] = useState<IUnits>(initial);
+  const { precipDays, rainDays, snowDays } = units;
+  const onChange = e => { setUnits({ ...units, [e.target.name]: e.target.value })};
   return (
     <Fragment>
       <h1>Precipitation Units</h1>
@@ -17,6 +24,7 @@ const UnitDays: React.FC<IProps> = props => {
       <form>
         <TextField
           id="outlined-name"
+          name="precipDays"
           label="Precipitation Days"
           value={precipDays}
           onChange={onChange}
@@ -25,6 +33,7 @@ const UnitDays: React.FC<IProps> = props => {
           />
         <TextField
           id="outlined-name"
+          name="rainDays"
           label="Rain Days"
           value={rainDays}
           onChange={onChange}
@@ -33,6 +42,7 @@ const UnitDays: React.FC<IProps> = props => {
         />
         <TextField
           id="outlined-name"
+          name="snowDays"
           label="Snow Days"
           value={snowDays}
           onChange={onChange}

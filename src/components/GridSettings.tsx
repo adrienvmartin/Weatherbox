@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
-import UnitDays from './UnitDays';
+import UnitDays from "./UnitDays";
 import { TempColours, PrecipColours } from "../constants";
 
 interface IGridSettingsState {
@@ -47,32 +47,11 @@ export class GridSettings extends React.Component<IGridSettingsState> {
   };
 
   public render() {
-    const {
-      metric,
-      collapsed,
-      open,
-      singleLine,
-      tempColour,
-      precipColour,
-      rainColour,
-      snowColour,
-      unitPrecipDays,
-      unitRainDays,
-      unitSnowDays,
-      // humidityColour,
-      // calculateAvg
-    } = this.state;
     return (
       <Fragment>
-        <Switches metric={metric} open={open} collapsed={collapsed} singleLine={singleLine} onChange={this.onChange} />
-        <ColourSettings
-          tempColour={tempColour}
-          precipColour={precipColour}
-          rainColour={rainColour}
-          snowColour={snowColour}
-          onChange={this.onChange}
-        />
-        <UnitDays precipDays={unitPrecipDays} rainDays={unitRainDays} snowDays={unitSnowDays} onChange={this.onChange} />
+        <Switches />
+        <ColourSettings />
+        <UnitDays />
       </Fragment>
     );
   }

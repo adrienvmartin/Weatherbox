@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import MetricSwitch from "./MetricSwitch";
+import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import { TempColours, PrecipColours } from "../constants";
 
@@ -48,9 +48,9 @@ export class GridSettings extends React.Component<IGridSettingsState> {
   public render() {
     const {
       metric,
-      // collapsed,
-      // open,
-      // singleLine,
+      collapsed,
+      open,
+      singleLine,
       tempColour,
       precipColour,
       rainColour,
@@ -63,7 +63,7 @@ export class GridSettings extends React.Component<IGridSettingsState> {
     } = this.state;
     return (
       <Fragment>
-        <MetricSwitch metric={metric} onChange={this.onChange} />
+        <Switches metric={metric} open={open} collapsed={collapsed} singleLine={singleLine} onChange={this.onChange} />
         <ColourSettings
           tempColour={tempColour}
           precipColour={precipColour}

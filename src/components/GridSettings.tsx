@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
-import { TempColours, PrecipColours } from "../constants";
+import { TempColours, PrecipColours, HumidityColours } from "../constants";
 
 interface IGridSettingsState {
   metric: string;
@@ -13,10 +13,10 @@ interface IGridSettingsState {
   precipColour: PrecipColours;
   rainColour: PrecipColours;
   snowColour: PrecipColours;
+  humidityColour: HumidityColours;
   unitPrecipDays: string;
   unitRainDays: string;
   unitSnowDays: string;
-  humidityColour: string;
   calculateAvg: string;
 }
 
@@ -29,10 +29,10 @@ export const INITIAL_STATE: IGridSettingsState = {
   precipColour: PrecipColours.BLUE,
   rainColour: PrecipColours.BLUE,
   snowColour: PrecipColours.BLUE,
+  humidityColour: HumidityColours.GREEN,
   unitPrecipDays: "0.2mm",
   unitRainDays: "0.2mm",
   unitSnowDays: "0.2cm",
-  humidityColour: "blue",
   calculateAvg: 'true'
 };
 

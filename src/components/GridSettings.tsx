@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
+import UnitDays from './UnitDays';
 import { TempColours, PrecipColours } from "../constants";
 
 interface IGridSettingsState {
@@ -55,9 +56,9 @@ export class GridSettings extends React.Component<IGridSettingsState> {
       precipColour,
       rainColour,
       snowColour,
-      // unitPrecipDays,
-      // unitRainDays,
-      // unitSnowDays,
+      unitPrecipDays,
+      unitRainDays,
+      unitSnowDays,
       // humidityColour,
       // calculateAvg
     } = this.state;
@@ -71,6 +72,7 @@ export class GridSettings extends React.Component<IGridSettingsState> {
           snowColour={snowColour}
           onChange={this.onChange}
         />
+        <UnitDays precipDays={unitPrecipDays} rainDays={unitRainDays} snowDays={unitSnowDays} onChange={this.onChange} />
       </Fragment>
     );
   }

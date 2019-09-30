@@ -23,8 +23,8 @@ const ColourSettings: React.FC<IProps> = props => {
   return (
     <Fragment>
       <h1>Colours</h1>
-      <br />
-      <FormControl>
+      <p>Select the colors you want to use for temperature, precipitation, rain, and snow.</p>
+  <FormControl>
         <FormLabel>Temperature</FormLabel>
         <RadioGroup
           aria-label="Temperature Colour"

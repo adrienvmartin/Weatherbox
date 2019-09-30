@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
 import GridSettings from "./Settings/GridSettings";
 import Output from "./Settings/Output";
+import Grid from './Grid/Grid';
 import {Colours} from "../constants";
 
 interface IState {
@@ -86,6 +87,9 @@ const Main: React.FC<IState> = () => {
         />
         <br/>
         <Output/>
+        <br />
+        <br />
+        <Grid />
         <br />
         <button onClick={() => {}}/>
       </Fragment>

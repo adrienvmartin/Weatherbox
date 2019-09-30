@@ -7,9 +7,12 @@ import {
   RAIN_COLOUR,
   SNOW_COLOUR,
   PRECIP_COLOUR,
+  HUMID_COLOUR,
   UNIT_PRECIP_DAYS,
   UNIT_RAIN_DAYS,
-  UNIT_SNOW_DAYS
+  UNIT_SNOW_DAYS,
+  CALC_YEAR_AVG,
+  CALC_MONTH_MEAN,
 } from "../actions/types";
 
 const initialState = INITIAL_STATE;
@@ -47,6 +50,11 @@ const settings = (state = initialState, action) => {
         ...state,
         snowColour: payload
       };
+    case HUMID_COLOUR:
+      return {
+        ...state,
+        humidColour: payload
+      };
     case PRECIP_COLOUR:
       return {
         ...state,
@@ -66,6 +74,16 @@ const settings = (state = initialState, action) => {
       return {
         ...state,
         unitSnowDays: payload
+      };
+    case CALC_YEAR_AVG:
+      return {
+        ...state,
+        calculateYearAvg: payload
+      };
+    case CALC_MONTH_MEAN:
+      return {
+        ...state,
+        calculateMeanTemps: payload
       };
     default:
       return state;

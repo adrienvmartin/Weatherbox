@@ -5,10 +5,10 @@ import UnitDays from "./UnitDays";
 import { TempColours, PrecipColours } from "../constants";
 
 interface IGridSettingsState {
-  metric: boolean;
-  collapsed: boolean;
-  open: boolean;
-  singleLine: boolean;
+  metric: string;
+  collapsed: string;
+  open: string;
+  singleLine: string;
   tempColour: TempColours;
   precipColour: PrecipColours;
   rainColour: PrecipColours;
@@ -17,14 +17,14 @@ interface IGridSettingsState {
   unitRainDays: string;
   unitSnowDays: string;
   humidityColour: string;
-  calculateAvg: boolean;
+  calculateAvg: string;
 }
 
 export const INITIAL_STATE: IGridSettingsState = {
-  metric: true,
-  collapsed: false,
-  open: false,
-  singleLine: true,
+  metric: 'true',
+  collapsed: 'false',
+  open: 'false',
+  singleLine: 'true',
   tempColour: TempColours.STANDARD,
   precipColour: PrecipColours.BLUE,
   rainColour: PrecipColours.BLUE,
@@ -33,7 +33,7 @@ export const INITIAL_STATE: IGridSettingsState = {
   unitRainDays: "0.2mm",
   unitSnowDays: "0.2cm",
   humidityColour: "blue",
-  calculateAvg: true
+  calculateAvg: 'true'
 };
 
 export class GridSettings extends React.Component<IGridSettingsState> {

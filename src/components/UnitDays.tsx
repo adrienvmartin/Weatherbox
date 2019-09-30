@@ -1,57 +1,57 @@
-import React, { Fragment, useState } from 'react';
-import { TextField } from '@material-ui/core';
+import React, { Fragment } from "react";
+import { TextField } from "@material-ui/core";
 
-interface IUnits {
-  precipDays: string;
-  rainDays: string;
-  snowDays: string;
+interface IProps {
+  unitPrecipDays: string;
+  unitRainDays: string;
+  unitSnowDays: string;
+  onChange: (e) => void;
 }
 
-const initial = {
-  precipDays: '0.2mm',
-  rainDays: '0.2mm',
-  snowDays: '0.2cm',
-};
-
-const UnitDays: React.FC = () => {
-  const [units, setUnits] = useState<IUnits>(initial);
-  const { precipDays, rainDays, snowDays } = units;
-  const onChange = e => { setUnits({ ...units, [e.target.name]: e.target.value })};
+const UnitDays: React.FC<IProps> = ({
+  unitPrecipDays,
+  unitRainDays,
+  unitSnowDays,
+  onChange
+}) => {
   return (
     <Fragment>
       <h1>Precipitation Units</h1>
-      <p>Enter the unit used for precipitation/rain/snow days, in whatever system of units you want (i.e. 0.2mm, 1.0in, etc).</p>
+      <p>
+        Enter the unit used for precipitation/rain/snow days, in whatever system
+        of units you want (i.e. 0.2mm, 1.0in, etc).
+      </p>
       <form>
         <TextField
           id="outlined-name"
-          name="precipDays"
+          name="unitPrecipDays"
           label="Precipitation Days"
-          value={precipDays}
-          onChange={onChange}
-          margin="normal"
-          variant="outlined"
-          />
-        <TextField
-          id="outlined-name"
-          name="rainDays"
-          label="Rain Days"
-          value={rainDays}
+          value={unitPrecipDays}
           onChange={onChange}
           margin="normal"
           variant="outlined"
         />
         <TextField
           id="outlined-name"
-          name="snowDays"
+          name="unitRainDays"
+          label="Rain Days"
+          value={unitRainDays}
+          onChange={onChange}
+          margin="normal"
+          variant="outlined"
+        />
+        <TextField
+          id="outlined-name"
+          name="unitSnowDays"
           label="Snow Days"
-          value={snowDays}
+          value={unitSnowDays}
           onChange={onChange}
           margin="normal"
           variant="outlined"
         />
       </form>
     </Fragment>
-  )
+  );
 };
 
 export default UnitDays;

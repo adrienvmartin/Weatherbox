@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Colours } from "../constants";
 import {
   Radio,
@@ -8,35 +8,24 @@ import {
   FormControlLabel
 } from "@material-ui/core";
 
-interface IColours {
+interface IProps {
   tempColour: string;
   precipColour: string;
   rainColour: string;
   snowColour: string;
   humidColour: string;
+  onChange: (e) => void;
 }
 
-const initial = {
-  tempColour: "standard",
-  precipColour: "blue",
-  rainColour: "blue",
-  snowColour: "blue",
-  humidColour: "green"
-};
-
-const ColourSettings: React.FC = () => {
+const ColourSettings: React.FC<IProps> = ({
+  tempColour,
+  precipColour,
+  rainColour,
+  snowColour,
+  humidColour,
+  onChange
+}) => {
   const { NONE, BLUE, GREEN, PASTEL, STANDARD } = Colours;
-  const [colour, setColour] = useState<IColours>(initial);
-  const {
-    tempColour,
-    precipColour,
-    rainColour,
-    snowColour,
-    humidColour
-  } = colour;
-
-  const onChange = e =>
-    setColour({ ...colour, [e.target.name]: e.target.value });
 
   return (
     <Fragment>

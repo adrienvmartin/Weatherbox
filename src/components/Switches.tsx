@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import {
   Radio,
   RadioGroup,
@@ -7,26 +7,16 @@ import {
   FormControlLabel
 } from "@material-ui/core";
 
-interface ISwitches {
+interface IProps {
   metric: string;
   open: string;
   collapsed: string;
   singleLine: string;
+  onChange: (e) => void;
 }
 
-const initial = {
-  metric: 'true',
-  open: 'false',
-  collapsed: 'false',
-  singleLine: 'true'
-};
-
-const Switches: React.FC = () => {
-  const [switches, setSwitches] = useState<ISwitches>(initial);
-  const { metric, collapsed, open, singleLine } = switches;
-  const onChange = e => {
-    setSwitches({ ...switches, [e.target.name]: e.target.value });
-  };
+const Switches: React.FC<IProps> = props => {
+  const { metric, collapsed, open, singleLine, onChange } = props;
   return (
     <Fragment>
       <h1>Switches</h1>
@@ -38,9 +28,13 @@ const Switches: React.FC = () => {
           value={metric}
           onChange={onChange}
         >
-          <FormControlLabel value={'true'} control={<Radio />} label="Celsius" />
           <FormControlLabel
-            value={'false'}
+            value={"true"}
+            control={<Radio />}
+            label="Celsius"
+          />
+          <FormControlLabel
+            value={"false"}
             control={<Radio />}
             label="Fahrenheit"
           />
@@ -55,8 +49,8 @@ const Switches: React.FC = () => {
           value={open}
           onChange={onChange}
         >
-          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
-          <FormControlLabel value={'false'} control={<Radio />} label="No" />
+          <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
+          <FormControlLabel value={"false"} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
       <br />
@@ -68,8 +62,8 @@ const Switches: React.FC = () => {
           value={collapsed}
           onChange={onChange}
         >
-          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
-          <FormControlLabel value={'false'} control={<Radio />} label="No" />
+          <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
+          <FormControlLabel value={"false"} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
       <br />
@@ -81,8 +75,8 @@ const Switches: React.FC = () => {
           value={singleLine}
           onChange={onChange}
         >
-          <FormControlLabel value={'true'} control={<Radio />} label="Yes" />
-          <FormControlLabel value={'false'} control={<Radio />} label="No" />
+          <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
+          <FormControlLabel value={"false"} control={<Radio />} label="No" />
         </RadioGroup>
       </FormControl>
     </Fragment>

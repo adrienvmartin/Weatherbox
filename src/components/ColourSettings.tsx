@@ -25,7 +25,7 @@ const ColourSettings: React.FC<IProps> = props => {
       <h1>Colours</h1>
       <br />
       <FormControl>
-        <FormLabel>Temperature Colour</FormLabel>
+        <FormLabel>Temperature</FormLabel>
         <RadioGroup
           aria-label="Temperature Colour"
           name="temp-color"
@@ -38,7 +38,7 @@ const ColourSettings: React.FC<IProps> = props => {
         </RadioGroup>
       </FormControl>
       <FormControl>
-        <FormLabel>Precipitation Colour</FormLabel>
+        <FormLabel>Precipitation</FormLabel>
         <RadioGroup
           aria-label="Precipitation Colour"
           name="precip-settings"
@@ -52,7 +52,7 @@ const ColourSettings: React.FC<IProps> = props => {
       </FormControl>
       <br />
       <FormControl>
-        <FormLabel>Rain Colour</FormLabel>
+        <FormLabel>Rain</FormLabel>
         <RadioGroup
           aria-label="Rain Colour"
           name="rain-color"
@@ -65,7 +65,7 @@ const ColourSettings: React.FC<IProps> = props => {
         </RadioGroup>
       </FormControl>
       <FormControl>
-        <FormLabel>Snow Colour</FormLabel>
+        <FormLabel>Snow</FormLabel>
         <RadioGroup
           aria-label="Snow Colour"
           name="snow-color"

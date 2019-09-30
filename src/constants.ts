@@ -1,11 +1,7 @@
-export enum TempColours {
-  NONE = '',
-  PASTEL = 'pastel',
-  STANDARD = 'standard',
-}
-
-export enum PrecipColours {
+export enum Colours {
   NONE = 'none',
   GREEN = 'green',
   BLUE = 'blue',
+  PASTEL = 'pastel',
+  STANDARD = 'standard',
 }

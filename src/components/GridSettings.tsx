@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
+import CalculateAverages from "./Calculate";
 import { Colours } from "../constants";
 
 interface IGridSettingsState {
@@ -17,7 +18,8 @@ interface IGridSettingsState {
   unitPrecipDays: string;
   unitRainDays: string;
   unitSnowDays: string;
-  calculateAvg: string;
+  calculateYearAvg: boolean;
+  calculateMeanTemps: boolean;
 }
 
 export const INITIAL_STATE: IGridSettingsState = {
@@ -33,7 +35,8 @@ export const INITIAL_STATE: IGridSettingsState = {
   unitPrecipDays: "0.2mm",
   unitRainDays: "0.2mm",
   unitSnowDays: "0.2cm",
-  calculateAvg: "true"
+  calculateYearAvg: true,
+  calculateMeanTemps: false
 };
 
 const GridSettings: React.FC<IGridSettingsState> = () => {
@@ -50,10 +53,15 @@ const GridSettings: React.FC<IGridSettingsState> = () => {
     humidColour,
     unitPrecipDays,
     unitRainDays,
-    unitSnowDays
+    unitSnowDays,
+    calculateYearAvg,
+    calculateMeanTemps
   } = settings;
   const onChange = e =>
     setSettings({ ...settings, [e.target.name]: e.target.value });
+
+  const changeCheckbox =e =>
+    setSettings({ ...settings, [e.target.name]: e.target.checked });
 
   return (
     <Fragment>
@@ -64,6 +72,7 @@ const GridSettings: React.FC<IGridSettingsState> = () => {
         singleLine={singleLine}
         onChange={onChange}
       />
+      <br />
       <ColourSettings
         tempColour={tempColour}
         precipColour={precipColour}
@@ -72,11 +81,18 @@ const GridSettings: React.FC<IGridSettingsState> = () => {
         humidColour={humidColour}
         onChange={onChange}
       />
+      <br />
       <UnitDays
         unitPrecipDays={unitPrecipDays}
         unitRainDays={unitRainDays}
         unitSnowDays={unitSnowDays}
         onChange={onChange}
+      />
+      <br />
+      <CalculateAverages
+        calculateYearAvg={calculateYearAvg}
+        calculateMeanTemps={calculateMeanTemps}
+        onChange={changeCheckbox}
       />
     </Fragment>
   );

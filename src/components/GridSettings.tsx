@@ -60,7 +60,7 @@ const GridSettings: React.FC<IGridSettingsState> = () => {
   const onChange = e =>
     setSettings({ ...settings, [e.target.name]: e.target.value });
 
-  const changeCheckbox =e =>
+  const changeCheckbox = e =>
     setSettings({ ...settings, [e.target.name]: e.target.checked });
 
   return (

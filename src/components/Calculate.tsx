@@ -29,6 +29,7 @@ const CalculateAverages: React.FC<IProps> = ({
                 checked={calculateYearAvg}
                 onChange={onChange}
                 value="calculateYearAvg"
+                name="calculateYearAvg"
               />
             }
             label="Yearly Average High/Low"
@@ -38,7 +39,8 @@ const CalculateAverages: React.FC<IProps> = ({
               <Checkbox
                 checked={calculateMeanTemps}
                 onChange={onChange}
-                value="calculateYearAvg"
+                value="calculateMeanTemps"
+                name="calculateMeanTemps"
               />
             }
             label="Monthly Mean Temperatures Based On Avg High/Low"

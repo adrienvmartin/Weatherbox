@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Colours } from "../constants";
+import { Colours } from "../../constants";
 import {
   Radio,
   RadioGroup,

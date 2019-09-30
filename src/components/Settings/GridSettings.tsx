@@ -3,7 +3,7 @@ import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
 import CalculateAverages from "./Calculate";
-import { Colours } from "../constants";
+import { Colours } from "../../constants";
 
 interface IProps {
   metric: string;

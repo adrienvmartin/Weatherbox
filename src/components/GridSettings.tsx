@@ -2,18 +2,18 @@ import React, { Fragment } from "react";
 import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
-import { TempColours, PrecipColours, HumidityColours } from "../constants";
+import { Colours } from "../constants";
 
 interface IGridSettingsState {
   metric: string;
   collapsed: string;
   open: string;
   singleLine: string;
-  tempColour: TempColours;
-  precipColour: PrecipColours;
-  rainColour: PrecipColours;
-  snowColour: PrecipColours;
-  humidityColour: HumidityColours;
+  tempColour: Colours;
+  precipColour: Colours;
+  rainColour: Colours;
+  snowColour: Colours;
+  humidityColour: Colours;
   unitPrecipDays: string;
   unitRainDays: string;
   unitSnowDays: string;
@@ -25,11 +25,11 @@ export const INITIAL_STATE: IGridSettingsState = {
   collapsed: 'false',
   open: 'false',
   singleLine: 'true',
-  tempColour: TempColours.STANDARD,
-  precipColour: PrecipColours.BLUE,
-  rainColour: PrecipColours.BLUE,
-  snowColour: PrecipColours.BLUE,
-  humidityColour: HumidityColours.GREEN,
+  tempColour: Colours.STANDARD,
+  precipColour: Colours.BLUE,
+  rainColour: Colours.BLUE,
+  snowColour: Colours.BLUE,
+  humidityColour: Colours.GREEN,
   unitPrecipDays: "0.2mm",
   unitRainDays: "0.2mm",
   unitSnowDays: "0.2cm",

@@ -1,13 +1,16 @@
-import React, { Fragment } from 'react';
-// @ts-ignore
-import logo from './logo.svg';
-import './App.css';
+import React, { Fragment } from "react";
+import { Provider } from "react-redux";
+import store from "./store";
+import "./App.css";
+import Main from '../src/components/Main';
 
 function App() {
   return (
-    <Fragment>
-      /* Insert weatherbox component here */
-    </Fragment>
+    <Provider store={store}>
+      <Fragment>
+      <Main />
+      </Fragment>
+    </Provider>
   );
 }
 

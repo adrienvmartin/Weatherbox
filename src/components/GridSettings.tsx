@@ -1,11 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
 import CalculateAverages from "./Calculate";
 import { Colours } from "../constants";
 
-interface IGridSettingsState {
+interface IProps {
   metric: string;
   collapsed: string;
   open: string;
@@ -20,27 +20,11 @@ interface IGridSettingsState {
   unitSnowDays: string;
   calculateYearAvg: boolean;
   calculateMeanTemps: boolean;
+  onChange: (e) => void;
+  changeCheckbox: (e) => void;
 }
 
-export const INITIAL_STATE: IGridSettingsState = {
-  metric: "true",
-  collapsed: "false",
-  open: "false",
-  singleLine: "true",
-  tempColour: Colours.STANDARD,
-  precipColour: Colours.BLUE,
-  rainColour: Colours.BLUE,
-  snowColour: Colours.BLUE,
-  humidColour: Colours.GREEN,
-  unitPrecipDays: "0.2mm",
-  unitRainDays: "0.2mm",
-  unitSnowDays: "0.2cm",
-  calculateYearAvg: true,
-  calculateMeanTemps: false
-};
-
-const GridSettings: React.FC<IGridSettingsState> = () => {
-  const [settings, setSettings] = useState<IGridSettingsState>(INITIAL_STATE);
+const GridSettings: React.FC<IProps> = (props) => {
   const {
     metric,
     open,
@@ -55,13 +39,10 @@ const GridSettings: React.FC<IGridSettingsState> = () => {
     unitRainDays,
     unitSnowDays,
     calculateYearAvg,
-    calculateMeanTemps
-  } = settings;
-  const onChange = e =>
-    setSettings({ ...settings, [e.target.name]: e.target.value });
-
-  const changeCheckbox = e =>
-    setSettings({ ...settings, [e.target.name]: e.target.checked });
+    calculateMeanTemps,
+    onChange,
+    changeCheckbox
+  } = props;
 
   return (
     <Fragment>

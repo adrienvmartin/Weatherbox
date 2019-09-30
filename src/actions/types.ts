@@ -11,3 +11,5 @@ export const UNIT_RAIN_DAYS = 'UNIT_RAIN_DAYS';
 export const UNIT_SNOW_DAYS = 'UNIT_SNOW_DAYS';
 export const CALC_YEAR_AVG = 'CALC_YEAR_AVG';
 export const CALC_MONTH_MEAN = 'CALC_MONTH_MEAN';
+export const UPDATE_SETTINGS = 'UPDATE_SETTINGS';
+export const GET_SETTINGS = 'GET_SETTINGS';

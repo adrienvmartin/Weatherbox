@@ -1,31 +1,93 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { connect } from "react-redux";
-import GridSettings, { INITIAL_STATE } from "./GridSettings";
+import GridSettings from "./GridSettings";
 import Output from "./Output";
+import {Colours} from "../constants";
 
-const Main = () => {
-  return (
-    <Fragment>
-      <GridSettings
-        metric={INITIAL_STATE.metric}
-        collapsed={INITIAL_STATE.collapsed}
-        open={INITIAL_STATE.open}
-        singleLine={INITIAL_STATE.singleLine}
-        tempColour={INITIAL_STATE.tempColour}
-        precipColour={INITIAL_STATE.precipColour}
-        rainColour={INITIAL_STATE.rainColour}
-        snowColour={INITIAL_STATE.snowColour}
-        unitPrecipDays={INITIAL_STATE.unitPrecipDays}
-        unitRainDays={INITIAL_STATE.unitRainDays}
-        unitSnowDays={INITIAL_STATE.unitSnowDays}
-        humidColour={INITIAL_STATE.humidColour}
-        calculateYearAvg={INITIAL_STATE.calculateYearAvg}
-        calculateMeanTemps={INITIAL_STATE.calculateMeanTemps}
-      />
-      <br />
-      <Output />
-    </Fragment>
-  );
+interface IState {
+  metric: string;
+  collapsed: string;
+  open: string;
+  singleLine: string;
+  tempColour: Colours;
+  precipColour: Colours;
+  rainColour: Colours;
+  snowColour: Colours;
+  humidColour: Colours;
+  unitPrecipDays: string;
+  unitRainDays: string;
+  unitSnowDays: string;
+  calculateYearAvg: boolean;
+  calculateMeanTemps: boolean;
+}
+
+export const INITIAL_STATE: IState = {
+  metric: "true",
+  collapsed: "false",
+  open: "false",
+  singleLine: "true",
+  tempColour: Colours.STANDARD,
+  precipColour: Colours.BLUE,
+  rainColour: Colours.BLUE,
+  snowColour: Colours.BLUE,
+  humidColour: Colours.GREEN,
+  unitPrecipDays: "0.2mm",
+  unitRainDays: "0.2mm",
+  unitSnowDays: "0.2cm",
+  calculateYearAvg: true,
+  calculateMeanTemps: false,
+};
+
+const Main: React.FC<IState> = () => {
+    const [settings, setSettings] = useState(INITIAL_STATE);
+
+    const onChange = e =>
+      setSettings({ ...settings, [e.target.name]: e.target.value });
+
+    const changeCheckbox = e =>
+      setSettings({ ...settings, [e.target.name]: e.target.checked });
+
+    const {
+      metric,
+      open,
+      collapsed,
+      singleLine,
+      tempColour,
+      precipColour,
+      rainColour,
+      snowColour,
+      humidColour,
+      unitPrecipDays,
+      unitRainDays,
+      unitSnowDays,
+      calculateYearAvg,
+      calculateMeanTemps,
+    } = settings;
+
+    return (
+      <Fragment>
+        <GridSettings
+          metric={metric}
+          collapsed={collapsed}
+          open={open}
+          singleLine={singleLine}
+          tempColour={tempColour}
+          precipColour={precipColour}
+          rainColour={rainColour}
+          snowColour={snowColour}
+          unitPrecipDays={unitPrecipDays}
+          unitRainDays={unitRainDays}
+          unitSnowDays={unitSnowDays}
+          humidColour={humidColour}
+          calculateYearAvg={calculateYearAvg}
+          calculateMeanTemps={calculateMeanTemps}
+          onChange={onChange}
+          changeCheckbox={changeCheckbox}
+        />
+        <br/>
+        <Output/>
+      </Fragment>
+    );
 };
 
 const mapStateToProps = state => ({

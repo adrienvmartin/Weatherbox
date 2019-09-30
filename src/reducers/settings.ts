@@ -1,4 +1,4 @@
-import { INITIAL_STATE } from "../components/GridSettings";
+import { INITIAL_STATE } from "../components/Main";
 import {
   METRIC_SWITCH,
   COLLAPSED_SWITCH,
@@ -13,6 +13,7 @@ import {
   UNIT_SNOW_DAYS,
   CALC_YEAR_AVG,
   CALC_MONTH_MEAN,
+  UPDATE_SETTINGS, GET_SETTINGS,
 } from "../actions/types";
 
 const initialState = INITIAL_STATE;
@@ -20,6 +21,13 @@ const initialState = INITIAL_STATE;
 const settings = (state = initialState, action) => {
   const { type, payload } = action;
   switch (type) {
+    case GET_SETTINGS:
+      return state;
+    case UPDATE_SETTINGS:
+      return {
+        ...state,
+        [payload.name]: [payload.value]
+      };
     case METRIC_SWITCH:
       return {
         ...state,

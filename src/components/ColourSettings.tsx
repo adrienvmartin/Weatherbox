@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import { PrecipColours, TempColours } from "../constants";
+import { Colours } from "../constants";
 import {
   Radio,
   RadioGroup,
@@ -9,32 +9,43 @@ import {
 } from "@material-ui/core";
 
 interface IColours {
-  onChange: (e) => void;
   tempColour: string;
   precipColour: string;
   rainColour: string;
   snowColour: string;
+  humidColour: string;
 }
 
 const initial = {
-  tempColour: 'standard',
-  precipColour: 'blue',
-  rainColour: 'blue',
-  snowColour: 'blue',
-  onChange: () => {},
+  tempColour: "standard",
+  precipColour: "blue",
+  rainColour: "blue",
+  snowColour: "blue",
+  humidColour: "green"
 };
 
 const ColourSettings: React.FC = () => {
-  const { BLUE, GREEN, NONE } = PrecipColours;
-  const { PASTEL, STANDARD } = TempColours;
+  const { NONE, BLUE, GREEN, PASTEL, STANDARD } = Colours;
   const [colour, setColour] = useState<IColours>(initial);
-  const { tempColour, precipColour, rainColour, snowColour } = colour;
-  const onChange = e => setColour({ ...colour, [e.target.name]: e.target.value });
+  const {
+    tempColour,
+    precipColour,
+    rainColour,
+    snowColour,
+    humidColour
+  } = colour;
+
+  const onChange = e =>
+    setColour({ ...colour, [e.target.name]: e.target.value });
+
   return (
     <Fragment>
       <h1>Colours</h1>
-      <p>Select the colors you want to use for temperature, precipitation, rain, and snow.</p>
-  <FormControl>
+      <p>
+        Select the colors you want to use for temperature, precipitation, rain,
+        and snow.
+      </p>
+      <FormControl>
         <FormLabel>Temperature</FormLabel>
         <RadioGroup
           aria-label="Temperature Colour"
@@ -42,7 +53,11 @@ const ColourSettings: React.FC = () => {
           value={tempColour}
           onChange={onChange}
         >
-          <FormControlLabel value={STANDARD} control={<Radio />} label="Standard" />
+          <FormControlLabel
+            value={STANDARD}
+            control={<Radio />}
+            label="Standard"
+          />
           <FormControlLabel value={PASTEL} control={<Radio />} label="Pastel" />
           <FormControlLabel value={NONE} control={<Radio />} label="None" />
         </RadioGroup>
@@ -84,6 +99,19 @@ const ColourSettings: React.FC = () => {
         >
           <FormControlLabel value={BLUE} control={<Radio />} label="Blue" />
           <FormControlLabel value={GREEN} control={<Radio />} label="Green" />
+          <FormControlLabel value={NONE} control={<Radio />} label="None" />
+        </RadioGroup>
+      </FormControl>
+      <FormControl>
+        <FormLabel>Humidity</FormLabel>
+        <RadioGroup
+          aria-label="Humidity Colour"
+          name="humidColour"
+          value={humidColour}
+          onChange={onChange}
+        >
+          <FormControlLabel value={GREEN} control={<Radio />} label="Green" />
+          <FormControlLabel value={PASTEL} control={<Radio />} label="Pastel" />
           <FormControlLabel value={NONE} control={<Radio />} label="None" />
         </RadioGroup>
       </FormControl>

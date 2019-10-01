@@ -4,6 +4,7 @@ import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
 import CalculateAverages from "./Calculate";
 import { Colours } from "../../constants";
+import { Paper } from "@material-ui/core";
 
 interface IProps {
   metric: string;
@@ -24,7 +25,7 @@ interface IProps {
   changeCheckbox: (e) => void;
 }
 
-const GridSettings: React.FC<IProps> = (props) => {
+const GridSettings: React.FC<IProps> = props => {
   const {
     metric,
     open,
@@ -46,35 +47,43 @@ const GridSettings: React.FC<IProps> = (props) => {
 
   return (
     <Fragment>
-      <Switches
-        metric={metric}
-        open={open}
-        collapsed={collapsed}
-        singleLine={singleLine}
-        onChange={onChange}
-      />
+      <Paper>
+        <Switches
+          metric={metric}
+          open={open}
+          collapsed={collapsed}
+          singleLine={singleLine}
+          onChange={onChange}
+        />
+      </Paper>
       <br />
-      <ColourSettings
-        tempColour={tempColour}
-        precipColour={precipColour}
-        rainColour={rainColour}
-        snowColour={snowColour}
-        humidColour={humidColour}
-        onChange={onChange}
-      />
+      <Paper>
+        <ColourSettings
+          tempColour={tempColour}
+          precipColour={precipColour}
+          rainColour={rainColour}
+          snowColour={snowColour}
+          humidColour={humidColour}
+          onChange={onChange}
+        />
+      </Paper>
       <br />
-      <UnitDays
-        unitPrecipDays={unitPrecipDays}
-        unitRainDays={unitRainDays}
-        unitSnowDays={unitSnowDays}
-        onChange={onChange}
-      />
+      <Paper>
+        <UnitDays
+          unitPrecipDays={unitPrecipDays}
+          unitRainDays={unitRainDays}
+          unitSnowDays={unitSnowDays}
+          onChange={onChange}
+        />
+      </Paper>
       <br />
-      <CalculateAverages
-        calculateYearAvg={calculateYearAvg}
-        calculateMeanTemps={calculateMeanTemps}
-        onChange={changeCheckbox}
-      />
+      <Paper>
+        <CalculateAverages
+          calculateYearAvg={calculateYearAvg}
+          calculateMeanTemps={calculateMeanTemps}
+          onChange={changeCheckbox}
+        />
+      </Paper>
     </Fragment>
   );
 };

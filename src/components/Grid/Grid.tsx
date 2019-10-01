@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDataGrid from "react-data-grid";
+import { Paper } from "@material-ui/core";
 
 const columns = [
   { key: "month", name: "Month", width: 200 },
@@ -15,8 +16,8 @@ const columns = [
   { key: "oct", name: "Oct.", editable: true, width: 70 },
   { key: "nov", name: "Nov.", editable: true, width: 70 },
   { key: "dec", name: "Dec.", editable: true, width: 70 },
-  { key: "year", name: "Year", width: 70 },
-  { key: "actions", name: "Actions", width: 70 }
+  { key: "year", name: "Year", width: 90 },
+  { key: "actions", name: "Actions", width: 84 }
 ];
 
 const rows = [
@@ -40,7 +41,7 @@ const rows = [
   { key: 17, month: "Mean monthly sunshine hours" },
   { key: 18, month: "Mean daily sunshine hours" },
   { key: 19, month: "Percent possible sunshine" },
-  { key: 20, month: "Average ultraviolet index" },
+  { key: 20, month: "Average ultraviolet index" }
 ];
 
 class Grid extends React.Component {
@@ -53,7 +54,7 @@ class Grid extends React.Component {
         callback: () => {
           const rows = this.state.rows;
           rows.splice(row.index, 1); //
-          this.setState(state =>({ rows }));
+          this.setState(state => ({ rows }));
         }
       }
     ];
@@ -72,15 +73,17 @@ class Grid extends React.Component {
   };
   render() {
     return (
-      <ReactDataGrid
-        columns={columns}
-        rowGetter={i => this.state.rows[i]}
-        rowsCount={21}
-        minHeight={1200}
-        onGridRowsUpdated={this.onGridRowsUpdated}
-        enableCellSelect={true}
-        getCellActions={this.getCellActions}
-      />
+      <Paper>
+        <ReactDataGrid
+          columns={columns}
+          rowGetter={i => this.state.rows[i]}
+          rowsCount={21}
+          minHeight={800}
+          onGridRowsUpdated={this.onGridRowsUpdated}
+          enableCellSelect={true}
+          getCellActions={this.getCellActions}
+        />
+      </Paper>
     );
   }
 }

@@ -67,31 +67,31 @@ const Main: React.FC<IState> = () => {
 
   return (
     <Fragment>
-      <GridSettings
-        metric={metric}
-        collapsed={collapsed}
-        open={open}
-        singleLine={singleLine}
-        tempColour={tempColour}
-        precipColour={precipColour}
-        rainColour={rainColour}
-        snowColour={snowColour}
-        unitPrecipDays={unitPrecipDays}
-        unitRainDays={unitRainDays}
-        unitSnowDays={unitSnowDays}
-        humidColour={humidColour}
-        calculateYearAvg={calculateYearAvg}
-        calculateMeanTemps={calculateMeanTemps}
-        onChange={onChange}
-        changeCheckbox={changeCheckbox}
-      />
-      <br />
-      <Output />
-      <br />
-      <br />
-      <Grid />
-      <br />
-      <button onClick={() => {}} />
+        <GridSettings
+          metric={metric}
+          collapsed={collapsed}
+          open={open}
+          singleLine={singleLine}
+          tempColour={tempColour}
+          precipColour={precipColour}
+          rainColour={rainColour}
+          snowColour={snowColour}
+          unitPrecipDays={unitPrecipDays}
+          unitRainDays={unitRainDays}
+          unitSnowDays={unitSnowDays}
+          humidColour={humidColour}
+          calculateYearAvg={calculateYearAvg}
+          calculateMeanTemps={calculateMeanTemps}
+          onChange={onChange}
+          changeCheckbox={changeCheckbox}
+        />
+        <br />
+        <Output />
+        <br />
+        <br />
+        <Grid />
+        <br />
+        <button onClick={() => {}} />
     </Fragment>
   );
 };

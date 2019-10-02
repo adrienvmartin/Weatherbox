@@ -4,16 +4,19 @@ import {
   FormGroup,
   FormControl,
   FormControlLabel,
-  Grid
+  Grid,
+  Button
 } from "@material-ui/core";
 
 interface IProps {
   rows: any;
   onChange: (e) => any;
+  selectAllChecks: () => any;
+  selectNone: () => any;
 }
 
 const RowSelector: React.FC<IProps> = props => {
-  const { onChange, rows } = props;
+  const { onChange, rows, selectAllChecks, selectNone } = props;
   return (
     <Fragment>
       <h1>Data Type Selection</h1>
@@ -258,6 +261,10 @@ const RowSelector: React.FC<IProps> = props => {
               label="Average UV index"
             />
           </FormGroup>
+        </Grid>
+        <Grid item xs={3}>
+          <Button onClick={selectAllChecks}>Select All</Button>
+          <Button onClick={selectNone}>Select None</Button>
         </Grid>
       </Grid>
     </Fragment>

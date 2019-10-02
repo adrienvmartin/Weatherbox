@@ -87,16 +87,6 @@ export const INITIAL_STATE: IState = {
   ]
 };
 
-const defaultRows = [
-  INITIAL_STATE.data[1],
-  INITIAL_STATE.data[3],
-  INITIAL_STATE.data[4],
-  INITIAL_STATE.data[5],
-  INITIAL_STATE.data[7],
-  INITIAL_STATE.data[9],
-  INITIAL_STATE.data[17]
-];
-
 class Main extends React.Component<{}, IState> {
   public state: IState = INITIAL_STATE;
 
@@ -135,13 +125,42 @@ class Main extends React.Component<{}, IState> {
     // @ts-ignore
     this.setState(state => ({
       ...state,
-      data: state.data.map(d => (d.key === target ? Object.assign(d, { selected: checked }) : d))
+      data: state.data.map(d =>
+        d.key === target ? Object.assign(d, { selected: checked }) : d
+      )
     }));
-    // console.log(`state: ${this.state} \n event - target value : ${value} \n target checked: ${checked} \n ${this.state.data.values}`);
     console.log(this.state);
   };
 
-  public selectedRows = (rows) => {
+  public selectAllChecks = () => {
+    this.setState(state => ({
+      ...state,
+      data: state.data.map(d => Object.assign(d, { selected: true }))
+    }));
+  };
+
+  public selectNone = () => {
+    this.setState(state => ({
+      ...state,
+      data: state.data.map(d => Object.assign(d, { selected: false }))
+    }));
+  };
+
+  // Find row in state that has same key and update the key and value to equal those of 'updated' - USE ROW'S BUILT-IN KEY OR NAME, **NOT** THE fromRow/toRow keys!
+  public onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
+    console.log(
+      "fromRow: " +
+        fromRow +
+        "\n toRow: " +
+        toRow +
+        "\n updated: " +
+        Object.keys(updated) +
+        " : " +
+        Object.values(updated)
+    );
+  };
+
+  public selectedRows = rows => {
     return rows.filter(r => r.selected === true);
   };
 
@@ -199,9 +218,17 @@ class Main extends React.Component<{}, IState> {
           changeCheckbox={this.changeCheckbox}
         />
         <br />
-        <RowSelector rows={this.state.data} onChange={this.changeRowbox} />
+        <RowSelector
+          rows={this.state.data}
+          onChange={this.changeRowbox}
+          selectAllChecks={this.selectAllChecks}
+          selectNone={this.selectNone}
+        />
         <br />
-        <Grid_NoRedux selectedRows={this.selectedRows(this.state.data)} defaultRows={defaultRows} />
+        <Grid_NoRedux
+          selectedRows={this.selectedRows(this.state.data)}
+          onGridRowsUpdated={this.onGridRowsUpdated}
+        />
         <br />
         <button onClick={() => {}} />
       </Fragment>

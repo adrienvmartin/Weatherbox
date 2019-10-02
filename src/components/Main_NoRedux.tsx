@@ -141,6 +141,10 @@ class Main extends React.Component<{}, IState> {
     console.log(this.state);
   };
 
+  public selectedRows = (rows) => {
+    return rows.filter(r => r.selected === true);
+  };
+
   render() {
     const { settings } = this.state;
 
@@ -197,7 +201,7 @@ class Main extends React.Component<{}, IState> {
         <br />
         <RowSelector rows={this.state.data} onChange={this.changeRowbox} />
         <br />
-        <Grid_NoRedux selectedRows={defaultRows} defaultRows={defaultRows} />
+        <Grid_NoRedux selectedRows={this.selectedRows(this.state.data)} defaultRows={defaultRows} />
         <br />
         <button onClick={() => {}} />
       </Fragment>

@@ -38,7 +38,6 @@ interface IDataObject {
   nov?: string;
   dec?: string;
   year?: string;
-
 }
 
 interface IState {
@@ -89,13 +88,13 @@ export const INITIAL_STATE: IState = {
 };
 
 const defaultRows = [
-  rows[1],
-  rows[3],
-  rows[4],
-  rows[5],
-  rows[7],
-  rows[9],
-  rows[17]
+  INITIAL_STATE.data[1],
+  INITIAL_STATE.data[3],
+  INITIAL_STATE.data[4],
+  INITIAL_STATE.data[5],
+  INITIAL_STATE.data[7],
+  INITIAL_STATE.data[9],
+  INITIAL_STATE.data[17]
 ];
 
 class Main extends React.Component<{}, IState> {
@@ -126,12 +125,20 @@ class Main extends React.Component<{}, IState> {
         [name]: checked
       }
     }));
+    console.log(e.target);
   };
 
   public changeRowbox = e => {
-    const name = e.target.name;
+    const value = e.target.value;
     const checked = e.target.checked;
-    this.setState(name, checked);
+    const target = this.state.data[value].key;
+    // @ts-ignore
+    this.setState(state => ({
+      ...state,
+      data: state.data.map(d => (d.key === target ? Object.assign(d, { selected: checked }) : d))
+    }));
+    // console.log(`state: ${this.state} \n event - target value : ${value} \n target checked: ${checked} \n ${this.state.data.values}`);
+    console.log(this.state);
   };
 
   render() {
@@ -188,7 +195,8 @@ class Main extends React.Component<{}, IState> {
           changeCheckbox={this.changeCheckbox}
         />
         <br />
-        <RowSelector rows={rows} onChange={this.changeCheckbox} />
+        <RowSelector rows={this.state.data} onChange={this.changeRowbox} />
+        <br />
         <Grid_NoRedux selectedRows={defaultRows} defaultRows={defaultRows} />
         <br />
         <button onClick={() => {}} />

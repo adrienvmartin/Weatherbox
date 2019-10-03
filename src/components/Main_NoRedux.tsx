@@ -17,8 +17,6 @@ interface ISettingsState {
   unitPrecipDays: string;
   unitRainDays: string;
   unitSnowDays: string;
-  calculateYearAvg: boolean;
-  calculateMeanTemps: boolean;
 }
 
 interface IDataObject {
@@ -59,8 +57,6 @@ export const INITIAL_STATE: IState = {
     unitPrecipDays: "0.2mm",
     unitRainDays: "0.2mm",
     unitSnowDays: "0.2cm",
-    calculateYearAvg: true,
-    calculateMeanTemps: false
   },
   data: [
     { key: 0, field: "Record high humidex", selected: false },
@@ -103,19 +99,6 @@ class Main extends React.Component<{}, IState> {
       }),
       () => console.log(this.state)
     );
-  };
-
-  public changeCheckbox = e => {
-    const name = e.target.name;
-    const checked = e.target.checked;
-    this.setState(state => ({
-      ...state,
-      settings: {
-        ...state.settings,
-        [name]: checked
-      }
-    }));
-    console.log(e.target);
   };
 
   public changeRowbox = e => {
@@ -181,8 +164,6 @@ class Main extends React.Component<{}, IState> {
       unitPrecipDays,
       unitRainDays,
       unitSnowDays,
-      calculateYearAvg,
-      calculateMeanTemps
     } = settings;
 
     const { data } = this.state;
@@ -203,10 +184,7 @@ class Main extends React.Component<{}, IState> {
           unitPrecipDays={unitPrecipDays}
           unitRainDays={unitRainDays}
           unitSnowDays={unitSnowDays}
-          calculateYearAvg={calculateYearAvg}
-          calculateMeanTemps={calculateMeanTemps}
           onChange={this.onChange}
-          changeCheckbox={this.changeCheckbox}
         />
         <br />
         <RowSelector

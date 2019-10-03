@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
-import CalculateAverages from "./Calculate";
 import { Colours } from "../../constants";
 import { Paper } from "@material-ui/core";
 
@@ -19,10 +18,7 @@ interface IProps {
   unitPrecipDays: string;
   unitRainDays: string;
   unitSnowDays: string;
-  calculateYearAvg: boolean;
-  calculateMeanTemps: boolean;
   onChange: (e) => any;
-  changeCheckbox: (e) => any;
 }
 
 const GridSettings: React.FC<IProps> = (props) => {
@@ -39,10 +35,7 @@ const GridSettings: React.FC<IProps> = (props) => {
       unitPrecipDays,
       unitRainDays,
       unitSnowDays,
-      calculateYearAvg,
-      calculateMeanTemps,
       onChange,
-      changeCheckbox
     } = props;
     return (
       <Fragment>
@@ -73,14 +66,6 @@ const GridSettings: React.FC<IProps> = (props) => {
             unitRainDays={unitRainDays}
             unitSnowDays={unitSnowDays}
             onChange={onChange}
-          />
-        </Paper>
-        <br />
-        <Paper>
-          <CalculateAverages
-            calculateYearAvg={calculateYearAvg}
-            calculateMeanTemps={calculateMeanTemps}
-            onChange={changeCheckbox}
           />
         </Paper>
       </Fragment>

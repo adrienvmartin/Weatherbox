@@ -3,6 +3,7 @@ import GridSettings_NoRedux from "./Settings/GridSettings_NoRedux";
 import Grid_NoRedux from "./Grid/Grid_NoRedux";
 import { Colours } from "../constants";
 import RowSelector from "./Grid/RowSelector";
+import { columns } from "../constants";
 
 interface ISettingsState {
   metric: string;
@@ -195,6 +196,7 @@ class Main extends React.Component<{}, IState> {
         />
         <br />
         <Grid_NoRedux
+          columns={columns}
           selectedRows={this.selectedRows(data)}
           onGridRowsUpdated={this.onGridRowsUpdated}
         />

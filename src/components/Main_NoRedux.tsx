@@ -23,7 +23,7 @@ interface ISettingsState {
 
 interface IDataObject {
   key: number;
-  month: string;
+  field: string;
   selected: boolean;
   jan?: string;
   feb?: string;
@@ -63,27 +63,27 @@ export const INITIAL_STATE: IState = {
     calculateMeanTemps: false
   },
   data: [
-    { key: 0, month: "Record high humidex", selected: false },
-    { key: 1, month: "Record high", selected: true },
-    { key: 2, month: "Mean maximum", selected: false },
-    { key: 3, month: "Average High", selected: true },
-    { key: 4, month: "Daily mean", selected: true },
-    { key: 5, month: "Average Low", selected: true },
-    { key: 6, month: "Mean minimum", selected: false },
-    { key: 7, month: "Record low", selected: true },
-    { key: 8, month: "Record low wind chill", selected: false },
-    { key: 9, month: "Average precipitation", selected: true },
-    { key: 10, month: "Average rainfall", selected: false },
-    { key: 11, month: "Average snowfall", selected: false },
-    { key: 12, month: "Average precipitation days", selected: true },
-    { key: 13, month: "Average rainy days", selected: false },
-    { key: 14, month: "Average snowy days", selected: false },
-    { key: 15, month: "Average relative humidity", selected: false },
-    { key: 16, month: "Average afternoon humidity", selected: false },
-    { key: 17, month: "Mean monthly sunshine hours", selected: true },
-    { key: 18, month: "Mean daily sunshine hours", selected: false },
-    { key: 19, month: "Percent possible sunshine", selected: false },
-    { key: 20, month: "Average ultraviolet index", selected: false }
+    { key: 0, field: "Record high humidex", selected: false },
+    { key: 1, field: "Record high", selected: true },
+    { key: 2, field: "Mean maximum", selected: false },
+    { key: 3, field: "Average High", selected: true },
+    { key: 4, field: "Daily mean", selected: true },
+    { key: 5, field: "Average Low", selected: true },
+    { key: 6, field: "Mean minimum", selected: false },
+    { key: 7, field: "Record low", selected: true },
+    { key: 8, field: "Record low wind chill", selected: false },
+    { key: 9, field: "Average precipitation", selected: true },
+    { key: 10, field: "Average rainfall", selected: false },
+    { key: 11, field: "Average snowfall", selected: false },
+    { key: 12, field: "Average precipitation days", selected: true },
+    { key: 13, field: "Average rainy days", selected: false },
+    { key: 14, field: "Average snowy days", selected: false },
+    { key: 15, field: "Average relative humidity", selected: false },
+    { key: 16, field: "Average afternoon humidity", selected: false },
+    { key: 17, field: "Mean monthly sunshine hours", selected: true },
+    { key: 18, field: "Mean daily sunshine hours", selected: false },
+    { key: 19, field: "Percent possible sunshine", selected: false },
+    { key: 20, field: "Average ultraviolet index", selected: false }
   ]
 };
 
@@ -146,18 +146,19 @@ class Main extends React.Component<{}, IState> {
     }));
   };
 
-  // Find row in state that has same key and update the key and value to equal those of 'updated' - USE ROW'S BUILT-IN KEY OR NAME, **NOT** THE fromRow/toRow keys!
-  public onGridRowsUpdated = ({ fromRow, toRow, updated }) => {
-    console.log(
-      "fromRow: " +
-        fromRow +
-        "\n toRow: " +
-        toRow +
-        "\n updated: " +
-        Object.keys(updated) +
-        " : " +
-        Object.values(updated)
-    );
+  public onGridRowsUpdated = ({ fromRow, updated }) => {
+    // @ts-ignore
+    this.setState(state => {
+      const selectedRows = state.data.filter(d => d.selected === true);
+      const rowId = selectedRows[fromRow].key;
+      const selectedObject = Object.entries(state.data[rowId]);
+      const selectedKey = Object.values(selectedObject)[0][1];
+      const selectedMonth = Object.keys(updated).toString();
+      const selectedMonthValue = Object.values(updated);
+      const stateCopy = Object.assign({}, state);
+      stateCopy.data[selectedKey][`${selectedMonth}`] = selectedMonthValue.toString();
+      return stateCopy;
+    });
   };
 
   public selectedRows = rows => {
@@ -184,17 +185,7 @@ class Main extends React.Component<{}, IState> {
       calculateMeanTemps
     } = settings;
 
-    /*const {
-       humidex,
-       recHigh,
-       meanMax,
-       avgHigh,
-       dayMean,
-       avgLow,
-       meanMin,
-       recLow,
-       windchill
-     } = data;*/
+    const { data } = this.state;
 
     // Submission function = columns.forEach(get existing rows by column key (jan, feb, etc))
     return (
@@ -219,14 +210,14 @@ class Main extends React.Component<{}, IState> {
         />
         <br />
         <RowSelector
-          rows={this.state.data}
+          rows={data}
           onChange={this.changeRowbox}
           selectAllChecks={this.selectAllChecks}
           selectNone={this.selectNone}
         />
         <br />
         <Grid_NoRedux
-          selectedRows={this.selectedRows(this.state.data)}
+          selectedRows={this.selectedRows(data)}
           onGridRowsUpdated={this.onGridRowsUpdated}
         />
         <br />

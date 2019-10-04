@@ -2,10 +2,13 @@ import { columns } from "./constants";
 
 export const dataParser = state => {
   const header = "{{Weather box";
-  // const footer = "}}";
+  const footer = "}}";
+  const location = "|location = \n";
   const collapsedSettings =
-    state.settings.collapsed === "true" ? `|collapsed = yes` : "";
-  const openSettings = state.settings.open === "true" ? `|open = yes` : "";
+    state.settings.collapsed === "true" ? `|collapsed = yes \n` : "";
+  const openSettings = state.settings.open === "true" ? `|open = yes \n` : "";
+  const singleLineSettings =
+    state.settings.singleLine === "true" ? `|singleLine = yes` : "";
 
   const units = { temp: "", precip: "", snow: "" };
   if (state.settings.metric == "true") {
@@ -109,17 +112,17 @@ export const dataParser = state => {
   const returnRowObj = () => {
     const looper = [];
     selectedRows.forEach(r => {
-      for (let i = 1; i < columns.length -1; i ++) {
+      for (let i = 1; i < columns.length - 1; i++) {
         const col = columns[i].name;
         //@ts-ignore
         looper.push(`|${col} ${r} = \n`);
         if (i % 12 === 0) {
           //@ts-ignore
-          looper.push('\n');
+          looper.push("\n");
         }
       }
     });
-    return looper.join('');
+    return looper.join("");
   };
 
   // const test = months.forEach(m => returnMonth(m, selectedRows));
@@ -141,5 +144,5 @@ export const dataParser = state => {
   // return `${Object.values(final[1])} ${Object.keys(final[1])} ${units.temp} = `;
   // const datakeys = Object.entries(dataObj);
   // datakeys.forEach(d => console.log(d));
-  return `${returnRowObj()}`;
+  return `${header} \n ${location}${collapsedSettings}${openSettings}${singleLineSettings} \n \n ${returnRowObj()}${footer}`;
 };

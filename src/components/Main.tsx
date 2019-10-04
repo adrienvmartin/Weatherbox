@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
-import GridSettings_NoRedux from "./Settings/GridSettings_NoRedux";
-import Grid_NoRedux from "./Grid/Grid_NoRedux";
+import GridSettings_NoRedux from "./Settings/GridSettings";
+import Grid_NoRedux from "./Grid/Grid";
 import { Colours } from "../constants";
 import RowSelector from "./Grid/RowSelector";
 import { columns, Category } from "../constants";

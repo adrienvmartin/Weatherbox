@@ -20,65 +20,64 @@ const Switches: React.FC<IProps> = props => {
   return (
     <Fragment>
       <h1>Switches</h1>
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Metric?</FormLabel>
-        <RadioGroup
-          aria-label="metric"
-          name="metric"
-          value={metric}
-          onChange={onChange}
-        >
-          <FormControlLabel
-            value={"true"}
-            control={<Radio />}
-            label="Celsius"
-          />
-          <FormControlLabel
-            value={"false"}
-            control={<Radio />}
-            label="Fahrenheit"
-          />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Open?</FormLabel>
-        <RadioGroup
-          aria-label="open"
-          name="open"
-          value={open}
-          onChange={onChange}
-        >
-          <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
-          <FormControlLabel value={"false"} control={<Radio />} label="No" />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Collapsed?</FormLabel>
-        <RadioGroup
-          aria-label="collapsed"
-          name="collapsed"
-          value={collapsed}
-          onChange={onChange}
-        >
-          <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
-          <FormControlLabel value={"false"} control={<Radio />} label="No" />
-        </RadioGroup>
-      </FormControl>
-      <br />
-      <FormControl component="fieldset">
-        <FormLabel component="legend">Single Line?</FormLabel>
-        <RadioGroup
-          aria-label="single-line"
-          name="singleLine"
-          value={singleLine}
-          onChange={onChange}
-        >
-          <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
-          <FormControlLabel value={"false"} control={<Radio />} label="No" />
-        </RadioGroup>
-      </FormControl>
+      <div className="settingsContainer">
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Metric?</FormLabel>
+          <RadioGroup
+            aria-label="metric"
+            name="metric"
+            value={metric}
+            onChange={onChange}
+          >
+            <FormControlLabel
+              value={"true"}
+              control={<Radio />}
+              label="Celsius"
+            />
+            <FormControlLabel
+              value={"false"}
+              control={<Radio />}
+              label="Fahrenheit"
+            />
+          </RadioGroup>
+        </FormControl>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Open?</FormLabel>
+          <RadioGroup
+            aria-label="open"
+            name="open"
+            value={open}
+            onChange={onChange}
+          >
+            <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
+            <FormControlLabel value={"false"} control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Collapsed?</FormLabel>
+          <RadioGroup
+            aria-label="collapsed"
+            name="collapsed"
+            value={collapsed}
+            onChange={onChange}
+          >
+            <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
+            <FormControlLabel value={"false"} control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Single Line?</FormLabel>
+          <RadioGroup
+            aria-label="single-line"
+            name="singleLine"
+            value={singleLine}
+            onChange={onChange}
+          >
+            <FormControlLabel value={"true"} control={<Radio />} label="Yes" />
+            <FormControlLabel value={"false"} control={<Radio />} label="No" />
+          </RadioGroup>
+        </FormControl>
+      </div>
     </Fragment>
   );
 };

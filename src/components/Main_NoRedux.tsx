@@ -5,7 +5,7 @@ import { Colours } from "../constants";
 import RowSelector from "./Grid/RowSelector";
 import { columns, Category } from "../constants";
 import { dataParser } from "../dataParser";
-import { TextField } from "@material-ui/core";
+import { TextField, Button } from "@material-ui/core";
 
 interface ISettingsState {
   metric: string;
@@ -73,25 +73,43 @@ export const INITIAL_STATE: IState = {
       field: "Record high humidex",
       selected: false,
       templateCode: "maximum humidex",
-      category: BLANK,
+      category: BLANK
     },
     {
       key: 1,
       field: "Record high",
       selected: true,
       templateCode: "record high",
-      category: TEMP,
+      category: TEMP
     },
     {
       key: 2,
       field: "Mean maximum",
       selected: false,
       templateCode: "avg record high",
-      category: TEMP,
+      category: TEMP
     },
-    { key: 3, field: "Average High", selected: true, templateCode: "high", category: TEMP, },
-    { key: 4, field: "Daily mean", selected: true, templateCode: "mean", category: TEMP },
-    { key: 5, field: "Average Low", selected: true, templateCode: "low", category: TEMP },
+    {
+      key: 3,
+      field: "Average High",
+      selected: true,
+      templateCode: "high",
+      category: TEMP
+    },
+    {
+      key: 4,
+      field: "Daily mean",
+      selected: true,
+      templateCode: "mean",
+      category: TEMP
+    },
+    {
+      key: 5,
+      field: "Average Low",
+      selected: true,
+      templateCode: "low",
+      category: TEMP
+    },
     {
       key: 6,
       field: "Mean minimum",
@@ -99,7 +117,13 @@ export const INITIAL_STATE: IState = {
       templateCode: "avg record low",
       category: TEMP
     },
-    { key: 7, field: "Record low", selected: true, templateCode: "record low", category: TEMP },
+    {
+      key: 7,
+      field: "Record low",
+      selected: true,
+      templateCode: "record low",
+      category: TEMP
+    },
     {
       key: 8,
       field: "Record low wind chill",
@@ -112,7 +136,7 @@ export const INITIAL_STATE: IState = {
       field: "Average precipitation",
       selected: true,
       templateCode: "precipitation",
-      category: PRECIP,
+      category: PRECIP
     },
     {
       key: 10,
@@ -133,28 +157,28 @@ export const INITIAL_STATE: IState = {
       field: "Average precipitation days",
       selected: true,
       templateCode: "precipitation days",
-      category: BLANK,
+      category: BLANK
     },
     {
       key: 13,
       field: "Average rainy days",
       selected: false,
       templateCode: "rain days",
-      category: BLANK,
+      category: BLANK
     },
     {
       key: 14,
       field: "Average snowy days",
       selected: false,
       templateCode: "snow days",
-      category: BLANK,
+      category: BLANK
     },
     {
       key: 15,
       field: "Average relative humidity",
       selected: false,
       templateCode: "humidity",
-      category: BLANK,
+      category: BLANK
     },
     {
       key: 16,
@@ -192,7 +216,7 @@ export const INITIAL_STATE: IState = {
       category: BLANK
     }
   ],
-  output: '',
+  output: ""
 };
 
 class Main extends React.Component<{}, IState> {
@@ -201,14 +225,13 @@ class Main extends React.Component<{}, IState> {
   public onChange = e => {
     const name = e.target.name;
     const value = e.target.value;
-    this.setState(
-      state => ({
-        ...state,
-        settings: {
-          ...state.settings,
-          [name]: value
-        }
-      }));
+    this.setState(state => ({
+      ...state,
+      settings: {
+        ...state.settings,
+        [name]: value
+      }
+    }));
   };
 
   public changeRowbox = e => {
@@ -264,7 +287,14 @@ class Main extends React.Component<{}, IState> {
     this.setState(state => ({
       ...state,
       output
-    }))
+    }));
+  };
+
+  public copyText = () => {
+    const copyText = document.getElementById("output");
+    // @ts-ignore
+    copyText.select();
+    document.execCommand("copy");
   };
 
   render() {
@@ -285,7 +315,7 @@ class Main extends React.Component<{}, IState> {
       unitSnowDays
     } = settings;
 
-    const { data } = this.state;
+    const { data, output } = this.state;
 
     return (
       <Fragment>
@@ -321,12 +351,15 @@ class Main extends React.Component<{}, IState> {
         <br />
         <br />
         <TextField
+          id="output"
           multiline
           variant="outlined"
           rowsMax="20"
-          value={this.state.output}
+          value={output}
           fullWidth
         />
+        <br />
+        <Button onClick={this.copyText}>Copy To Clipboard</Button>
       </Fragment>
     );
   }

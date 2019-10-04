@@ -1,9 +1,8 @@
 import React, { Fragment } from "react";
-import GridSettings_NoRedux from "./Settings/GridSettings";
-import Grid_NoRedux from "./Grid/Grid";
+import GridSettings from "./Settings/GridSettings";
 import { Colours } from "../constants";
 import RowSelector from "./Grid/RowSelector";
-import { columns, Category } from "../constants";
+import { Category } from "../constants";
 import { dataParser } from "../dataParser";
 import { TextField, Button } from "@material-ui/core";
 
@@ -261,27 +260,6 @@ class Main extends React.Component<{}, IState> {
     }));
   };
 
-  public onGridRowsUpdated = ({ fromRow, updated }) => {
-    // @ts-ignore
-    this.setState(state => {
-      const selectedRows = state.data.filter(d => d.selected === true);
-      const rowId = selectedRows[fromRow].key;
-      const selectedObject = Object.entries(state.data[rowId]);
-      const selectedKey = Object.values(selectedObject)[0][1];
-      const selectedMonth = Object.keys(updated).toString();
-      const selectedMonthValue = Object.values(updated);
-      const stateCopy = Object.assign({}, state);
-      stateCopy.data[selectedKey][
-        `${selectedMonth}`
-      ] = selectedMonthValue.toString();
-      return stateCopy;
-    });
-  };
-
-  public selectedRows = rows => {
-    return rows.filter(r => r.selected === true);
-  };
-
   public generate = () => {
     const output = dataParser(this.state);
     this.setState(state => ({
@@ -319,7 +297,7 @@ class Main extends React.Component<{}, IState> {
 
     return (
       <Fragment>
-        <GridSettings_NoRedux
+        <GridSettings
           metric={metric}
           open={open}
           collapsed={collapsed}
@@ -342,13 +320,7 @@ class Main extends React.Component<{}, IState> {
           selectNone={this.selectNone}
         />
         <br />
-        <Grid_NoRedux
-          columns={columns}
-          selectedRows={this.selectedRows(data)}
-          onGridRowsUpdated={this.onGridRowsUpdated}
-          onChange={this.generate}
-        />
-        <br />
+        <Button onClick={this.generate}>Generate Template</Button>
         <br />
         <TextField
           id="output"

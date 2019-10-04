@@ -1,6 +1,7 @@
 .App {
   font-family: sans-serif;
   text-align: center;
+  background-color: #225555;
 }
 
 .App-logo {
@@ -20,4 +21,14 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.settingsContainer {
+  padding: auto;
+  display: flex;
+  align-items: center;
+}
+
+.settingsItem {
+  margin-left: 50px;
 }

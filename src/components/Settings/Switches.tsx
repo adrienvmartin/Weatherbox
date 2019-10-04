@@ -20,9 +20,9 @@ const Switches: React.FC<IProps> = props => {
   return (
     <Fragment>
       <h1>Switches</h1>
-      <div className="settingsContainer">
+      <div className="switches">
         <FormControl component="fieldset">
-          <FormLabel component="legend">Metric?</FormLabel>
+          <FormLabel component="legend">Units?</FormLabel>
           <RadioGroup
             aria-label="metric"
             name="metric"
@@ -32,12 +32,12 @@ const Switches: React.FC<IProps> = props => {
             <FormControlLabel
               value={"true"}
               control={<Radio />}
-              label="Celsius"
+              label="Metric"
             />
             <FormControlLabel
               value={"false"}
               control={<Radio />}
-              label="Fahrenheit"
+              label="Imperial"
             />
           </RadioGroup>
         </FormControl>

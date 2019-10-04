@@ -2,7 +2,7 @@ import { columns, Category, Colours } from "./constants";
 
 const { TEMP, PRECIP, SNOW } = Category;
 
-const { NONE, GREEN, BLUE, PASTEL, STANDARD } = Colours;
+const { NONE } = Colours;
 
 export const dataParser = state => {
   const {
@@ -14,7 +14,10 @@ export const dataParser = state => {
     rainColour,
     snowColour,
     tempColour,
-    humidColour
+    humidColour,
+    unitPrecipDays,
+    unitRainDays,
+    unitSnowDays
   } = state.settings;
 
   const header = "{{Weather box";
@@ -26,13 +29,22 @@ export const dataParser = state => {
   const singleLineSettings =
     singleLine === "true" ? `|singleLine = yes \n` : "";
 
-  // Add precipitation days, colours here
+  const precipStatement =
+    precipColour === NONE ? "" : `|precipitation colour = ${precipColour}\n`;
+  const rainStatement =
+    rainColour === NONE ? "" : `|rain colour = ${rainColour}\n`;
+  const snowStatement =
+    snowColour === NONE ? "" : `|snow colour = ${snowColour}\n`;
+  const tempStatement =
+    tempColour === NONE ? "" : `|temperature colour = ${tempColour}\n`;
+  const humidStatement =
+    humidColour === NONE ? "" : `|humidity colour = ${humidColour}\n`;
 
-  const precipStatement = precipColour === NONE ? '' : `|precipitation colour = ${precipColour}\n`;
-  const rainStatement = rainColour === NONE ? '' : `|rain colour = ${rainColour}\n`;
-  const snowStatement = snowColour === NONE ? '' : `|snow colour = ${snowColour}\n`;
-  const tempStatement = tempColour === NONE ? '' : `|temperature colour = ${tempColour}\n`;
-  const humidStatement = humidColour === NONE ? '' : `|humidity colour = ${humidColour}\n`;
+  const precipUnits = `|unit precipitation days = ${unitPrecipDays} \n`;
+  const rainUnits = `|unit rain days = ${unitRainDays} \n`;
+  const snowUnits = `|unit snow days = ${unitSnowDays} \n`;
+
+  const mainSettings = `${location}${collapsedSettings}${openSettings}${singleLineSettings}${tempStatement}${precipStatement}${rainStatement}${snowStatement}${humidStatement}${precipUnits}${rainUnits}${snowUnits}`;
 
   const metricTemp = metric === "true" ? "C" : "F";
   const metricPrecip = metric === "true" ? "mm" : "inch";
@@ -51,17 +63,14 @@ export const dataParser = state => {
   };
 
   const selectedRows = state.data.filter(d => d.selected === true);
-  //.map(d => d.templateCode);
 
   const returnRowObj = () => {
     const looper = [];
     selectedRows.forEach(r => {
       for (let i = 1; i < columns.length - 1; i++) {
         const col = columns[i].name;
-        const colId = columns[i].key;
         //@ts-ignore
         looper.push(`|${col} ${r.templateCode} ${unitType(r)} = \n`);
-        // if (precip or snow is present in row) { looper.push(`|${col} ${r} {metricTemp} = \n`); }
         if (i % 12 === 0) {
           //@ts-ignore
           looper.push("\n");
@@ -71,5 +80,5 @@ export const dataParser = state => {
     return looper.join("");
   };
 
-  return `${header} \n${location}${collapsedSettings}${openSettings}${singleLineSettings}${tempStatement}${precipStatement}${rainStatement}${snowStatement}${humidStatement} \n \n${returnRowObj()}${footer}`;
+  return `${header} \n${mainSettings} \n${returnRowObj()}${footer}`;
 };

@@ -24,3 +24,5 @@ yarn-error.log*
 
 .idea/
 react-app-env.d.ts
+
+unused_weatherbox_functions.rtf

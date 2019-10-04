@@ -24,7 +24,7 @@ const Grid: React.FC<IProps> = ({
         onGridRowsUpdated={onGridRowsUpdated}
         enableCellSelect={true}
       />
-      <Button onClick={onChange}>Submit</Button>
+      <Button onClick={onChange}>Generate Template Code</Button>
     </Paper>
   );
 };

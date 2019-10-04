@@ -4,6 +4,8 @@ import Grid_NoRedux from "./Grid/Grid_NoRedux";
 import { Colours } from "../constants";
 import RowSelector from "./Grid/RowSelector";
 import { columns } from "../constants";
+import { dataParser } from "../dataParser";
+import { TextField } from "@material-ui/core";
 
 interface ISettingsState {
   metric: string;
@@ -24,6 +26,7 @@ interface IDataObject {
   key: number;
   field: string;
   selected: boolean;
+  templateCode: string;
   jan?: string;
   feb?: string;
   mar?: string;
@@ -57,30 +60,115 @@ export const INITIAL_STATE: IState = {
     humidColour: Colours.GREEN,
     unitPrecipDays: "0.2mm",
     unitRainDays: "0.2mm",
-    unitSnowDays: "0.2cm",
+    unitSnowDays: "0.2cm"
   },
   data: [
-    { key: 0, field: "Record high humidex", selected: false },
-    { key: 1, field: "Record high", selected: true },
-    { key: 2, field: "Mean maximum", selected: false },
-    { key: 3, field: "Average High", selected: true },
-    { key: 4, field: "Daily mean", selected: true },
-    { key: 5, field: "Average Low", selected: true },
-    { key: 6, field: "Mean minimum", selected: false },
-    { key: 7, field: "Record low", selected: true },
-    { key: 8, field: "Record low wind chill", selected: false },
-    { key: 9, field: "Average precipitation", selected: true },
-    { key: 10, field: "Average rainfall", selected: false },
-    { key: 11, field: "Average snowfall", selected: false },
-    { key: 12, field: "Average precipitation days", selected: true },
-    { key: 13, field: "Average rainy days", selected: false },
-    { key: 14, field: "Average snowy days", selected: false },
-    { key: 15, field: "Average relative humidity", selected: false },
-    { key: 16, field: "Average afternoon humidity", selected: false },
-    { key: 17, field: "Mean monthly sunshine hours", selected: true },
-    { key: 18, field: "Mean daily sunshine hours", selected: false },
-    { key: 19, field: "Percent possible sunshine", selected: false },
-    { key: 20, field: "Average ultraviolet index", selected: false }
+    {
+      key: 0,
+      field: "Record high humidex",
+      selected: false,
+      templateCode: "maximum humidex",
+    },
+    {
+      key: 1,
+      field: "Record high",
+      selected: true,
+      templateCode: "record high",
+    },
+    {
+      key: 2,
+      field: "Mean maximum",
+      selected: false,
+      templateCode: "avg record high",
+    },
+    { key: 3, field: "Average High", selected: true, templateCode: "high" },
+    { key: 4, field: "Daily mean", selected: true, templateCode: "mean" },
+    { key: 5, field: "Average Low", selected: true, templateCode: "low" },
+    {
+      key: 6,
+      field: "Mean minimum",
+      selected: false,
+      templateCode: "avg record low"
+    },
+    { key: 7, field: "Record low", selected: true, templateCode: "record low" },
+    {
+      key: 8,
+      field: "Record low wind chill",
+      selected: false,
+      templateCode: "chill"
+    },
+    {
+      key: 9,
+      field: "Average precipitation",
+      selected: true,
+      templateCode: "precipitation"
+    },
+    {
+      key: 10,
+      field: "Average rainfall",
+      selected: false,
+      templateCode: "rain"
+    },
+    {
+      key: 11,
+      field: "Average snowfall",
+      selected: false,
+      templateCode: "snow"
+    },
+    {
+      key: 12,
+      field: "Average precipitation days",
+      selected: true,
+      templateCode: "precipitation days"
+    },
+    {
+      key: 13,
+      field: "Average rainy days",
+      selected: false,
+      templateCode: "rain days"
+    },
+    {
+      key: 14,
+      field: "Average snowy days",
+      selected: false,
+      templateCode: "snow days"
+    },
+    {
+      key: 15,
+      field: "Average relative humidity",
+      selected: false,
+      templateCode: "humidity"
+    },
+    {
+      key: 16,
+      field: "Average afternoon humidity",
+      selected: false,
+      templateCode: "afthumidity"
+    },
+    {
+      key: 17,
+      field: "Mean monthly sunshine hours",
+      selected: true,
+      templateCode: "sun"
+    },
+    {
+      key: 18,
+      field: "Mean daily sunshine hours",
+      selected: false,
+      templateCode: "d sun"
+    },
+    {
+      key: 19,
+      field: "Percent possible sunshine",
+      selected: false,
+      templateCode: "percentsun"
+    },
+    {
+      key: 20,
+      field: "Average ultraviolet index",
+      selected: false,
+      templateCode: "uv"
+    }
   ]
 };
 
@@ -140,7 +228,9 @@ class Main extends React.Component<{}, IState> {
       const selectedMonth = Object.keys(updated).toString();
       const selectedMonthValue = Object.values(updated);
       const stateCopy = Object.assign({}, state);
-      stateCopy.data[selectedKey][`${selectedMonth}`] = selectedMonthValue.toString();
+      stateCopy.data[selectedKey][
+        `${selectedMonth}`
+      ] = selectedMonthValue.toString();
       return stateCopy;
     });
   };
@@ -164,7 +254,7 @@ class Main extends React.Component<{}, IState> {
       humidColour,
       unitPrecipDays,
       unitRainDays,
-      unitSnowDays,
+      unitSnowDays
     } = settings;
 
     const { data } = this.state;
@@ -202,6 +292,14 @@ class Main extends React.Component<{}, IState> {
         />
         <br />
         <button onClick={() => {}} />
+        <br />
+        <TextField
+          multiline
+          variant="outlined"
+          rowsMax="20"
+          value={dataParser(this.state)}
+          fullWidth
+        />
       </Fragment>
     );
   }

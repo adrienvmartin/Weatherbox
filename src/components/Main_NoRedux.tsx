@@ -46,6 +46,7 @@ interface IDataObject {
 interface IState {
   settings: ISettingsState;
   data: Array<IDataObject>;
+  output?: any;
 }
 
 const { BLANK, TEMP, PRECIP, SNOW } = Category;
@@ -190,7 +191,8 @@ export const INITIAL_STATE: IState = {
       templateCode: "uv",
       category: BLANK
     }
-  ]
+  ],
+  output: '',
 };
 
 class Main extends React.Component<{}, IState> {
@@ -257,6 +259,14 @@ class Main extends React.Component<{}, IState> {
     return rows.filter(r => r.selected === true);
   };
 
+  public generate = () => {
+    const output = dataParser(this.state);
+    this.setState(state => ({
+      ...state,
+      output
+    }))
+  };
+
   render() {
     const { settings } = this.state;
 
@@ -277,7 +287,6 @@ class Main extends React.Component<{}, IState> {
 
     const { data } = this.state;
 
-    // Submission function = columns.forEach(get existing rows by column key (jan, feb, etc))
     return (
       <Fragment>
         <GridSettings_NoRedux
@@ -307,6 +316,7 @@ class Main extends React.Component<{}, IState> {
           columns={columns}
           selectedRows={this.selectedRows(data)}
           onGridRowsUpdated={this.onGridRowsUpdated}
+          onChange={this.generate}
         />
         <br />
         <br />
@@ -314,7 +324,7 @@ class Main extends React.Component<{}, IState> {
           multiline
           variant="outlined"
           rowsMax="20"
-          value={dataParser(this.state)}
+          value={this.state.output}
           fullWidth
         />
       </Fragment>

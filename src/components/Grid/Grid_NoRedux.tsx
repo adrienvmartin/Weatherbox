@@ -6,12 +6,14 @@ interface IProps {
   columns: object[];
   selectedRows: object[];
   onGridRowsUpdated: ({ fromRow, toRow, updated }) => any;
+  onChange: (state: any) => any;
 }
 
 const Grid: React.FC<IProps> = ({
   columns,
   selectedRows,
-  onGridRowsUpdated
+  onGridRowsUpdated,
+  onChange
 }) => {
   return (
     <Paper>
@@ -22,7 +24,7 @@ const Grid: React.FC<IProps> = ({
         onGridRowsUpdated={onGridRowsUpdated}
         enableCellSelect={true}
       />
-      <Button onClick={() => {}}>Submit</Button>
+      <Button onClick={onChange}>Submit</Button>
     </Paper>
   );
 };

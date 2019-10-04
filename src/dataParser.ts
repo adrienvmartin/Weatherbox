@@ -2,7 +2,7 @@ import { columns, Category, Colours } from "./constants";
 
 const { TEMP, PRECIP, SNOW } = Category;
 
-const { NONE } = Colours;
+const { NONE, STANDARD } = Colours;
 
 export const dataParser = state => {
   const {
@@ -36,7 +36,7 @@ export const dataParser = state => {
   const snowStatement =
     snowColour === NONE ? "" : `|snow colour = ${snowColour}\n`;
   const tempStatement =
-    tempColour === NONE ? "" : `|temperature colour = ${tempColour}\n`;
+    tempColour === STANDARD ? "" : `|temperature colour = ${tempColour}\n`;
   const humidStatement =
     humidColour === NONE ? "" : `|humidity colour = ${humidColour}\n`;
 

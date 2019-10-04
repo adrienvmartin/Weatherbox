@@ -206,9 +206,7 @@ class Main extends React.Component<{}, IState> {
           ...state.settings,
           [name]: value
         }
-      }),
-      () => console.log(this.state)
-    );
+      }));
   };
 
   public changeRowbox = e => {
@@ -222,7 +220,6 @@ class Main extends React.Component<{}, IState> {
         d.key === target ? Object.assign(d, { selected: checked }) : d
       )
     }));
-    console.log(this.state);
   };
 
   public selectAllChecks = () => {

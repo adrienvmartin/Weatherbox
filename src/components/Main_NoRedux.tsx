@@ -3,7 +3,7 @@ import GridSettings_NoRedux from "./Settings/GridSettings_NoRedux";
 import Grid_NoRedux from "./Grid/Grid_NoRedux";
 import { Colours } from "../constants";
 import RowSelector from "./Grid/RowSelector";
-import { columns } from "../constants";
+import { columns, Category } from "../constants";
 import { dataParser } from "../dataParser";
 import { TextField } from "@material-ui/core";
 
@@ -27,6 +27,7 @@ interface IDataObject {
   field: string;
   selected: boolean;
   templateCode: string;
+  category: Category;
   jan?: string;
   feb?: string;
   mar?: string;
@@ -47,17 +48,20 @@ interface IState {
   data: Array<IDataObject>;
 }
 
+const { BLANK, TEMP, PRECIP, SNOW } = Category;
+const { STANDARD, BLUE, GREEN } = Colours;
+
 export const INITIAL_STATE: IState = {
   settings: {
     metric: "true",
     collapsed: "false",
     open: "false",
     singleLine: "true",
-    tempColour: Colours.STANDARD,
-    precipColour: Colours.BLUE,
-    rainColour: Colours.BLUE,
-    snowColour: Colours.BLUE,
-    humidColour: Colours.GREEN,
+    tempColour: STANDARD,
+    precipColour: BLUE,
+    rainColour: BLUE,
+    snowColour: BLUE,
+    humidColour: GREEN,
     unitPrecipDays: "0.2mm",
     unitRainDays: "0.2mm",
     unitSnowDays: "0.2cm"
@@ -68,106 +72,123 @@ export const INITIAL_STATE: IState = {
       field: "Record high humidex",
       selected: false,
       templateCode: "maximum humidex",
+      category: BLANK,
     },
     {
       key: 1,
       field: "Record high",
       selected: true,
       templateCode: "record high",
+      category: TEMP,
     },
     {
       key: 2,
       field: "Mean maximum",
       selected: false,
       templateCode: "avg record high",
+      category: TEMP,
     },
-    { key: 3, field: "Average High", selected: true, templateCode: "high" },
-    { key: 4, field: "Daily mean", selected: true, templateCode: "mean" },
-    { key: 5, field: "Average Low", selected: true, templateCode: "low" },
+    { key: 3, field: "Average High", selected: true, templateCode: "high", category: TEMP, },
+    { key: 4, field: "Daily mean", selected: true, templateCode: "mean", category: TEMP },
+    { key: 5, field: "Average Low", selected: true, templateCode: "low", category: TEMP },
     {
       key: 6,
       field: "Mean minimum",
       selected: false,
-      templateCode: "avg record low"
+      templateCode: "avg record low",
+      category: TEMP
     },
-    { key: 7, field: "Record low", selected: true, templateCode: "record low" },
+    { key: 7, field: "Record low", selected: true, templateCode: "record low", category: TEMP },
     {
       key: 8,
       field: "Record low wind chill",
       selected: false,
-      templateCode: "chill"
+      templateCode: "chill",
+      category: BLANK
     },
     {
       key: 9,
       field: "Average precipitation",
       selected: true,
-      templateCode: "precipitation"
+      templateCode: "precipitation",
+      category: PRECIP,
     },
     {
       key: 10,
       field: "Average rainfall",
       selected: false,
-      templateCode: "rain"
+      templateCode: "rain",
+      category: PRECIP
     },
     {
       key: 11,
       field: "Average snowfall",
       selected: false,
-      templateCode: "snow"
+      templateCode: "snow",
+      category: SNOW
     },
     {
       key: 12,
       field: "Average precipitation days",
       selected: true,
-      templateCode: "precipitation days"
+      templateCode: "precipitation days",
+      category: BLANK,
     },
     {
       key: 13,
       field: "Average rainy days",
       selected: false,
-      templateCode: "rain days"
+      templateCode: "rain days",
+      category: BLANK,
     },
     {
       key: 14,
       field: "Average snowy days",
       selected: false,
-      templateCode: "snow days"
+      templateCode: "snow days",
+      category: BLANK,
     },
     {
       key: 15,
       field: "Average relative humidity",
       selected: false,
-      templateCode: "humidity"
+      templateCode: "humidity",
+      category: BLANK,
     },
     {
       key: 16,
       field: "Average afternoon humidity",
       selected: false,
-      templateCode: "afthumidity"
+      templateCode: "afthumidity",
+      category: BLANK
     },
     {
       key: 17,
       field: "Mean monthly sunshine hours",
       selected: true,
-      templateCode: "sun"
+      templateCode: "sun",
+      category: BLANK
     },
     {
       key: 18,
       field: "Mean daily sunshine hours",
       selected: false,
-      templateCode: "d sun"
+      templateCode: "d sun",
+      category: BLANK
     },
     {
       key: 19,
       field: "Percent possible sunshine",
       selected: false,
-      templateCode: "percentsun"
+      templateCode: "percentsun",
+      category: BLANK
     },
     {
       key: 20,
       field: "Average ultraviolet index",
       selected: false,
-      templateCode: "uv"
+      templateCode: "uv",
+      category: BLANK
     }
   ]
 };
@@ -291,7 +312,6 @@ class Main extends React.Component<{}, IState> {
           onGridRowsUpdated={this.onGridRowsUpdated}
         />
         <br />
-        <button onClick={() => {}} />
         <br />
         <TextField
           multiline

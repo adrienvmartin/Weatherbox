@@ -21,7 +21,7 @@ const RowSelector: React.FC<IProps> = props => {
     <Fragment>
       <h1>Data Type Selection</h1>
       <p>Select the types of data you want to include in your weatherbox.</p>
-      <Grid container spacing={2}>
+      <Grid container spacing={2} style={{ marginLeft: 'auto', marginRight: 'auto' }}>
         <Grid item xs={3}>
           <FormControl component="fieldset">
             <FormGroup>

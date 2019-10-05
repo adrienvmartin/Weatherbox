@@ -32,3 +32,9 @@
 .settingsItem {
   margin-left: 50px;
 }
+
+.switches {
+  align-content: flex-end;
+  display: flex;
+  padding: auto;
+}

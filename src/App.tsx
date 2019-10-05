@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import "./App.css";
-import { CssBaseline, Container } from "@material-ui/core";
+import { CssBaseline, Container, Paper } from "@material-ui/core";
 import Main from "./components/Main";
 
 function App() {
@@ -8,7 +8,9 @@ function App() {
     <Fragment>
       <CssBaseline />
       <Container>
-        <Main />
+        <Paper>
+          <Main />
+        </Paper>
       </Container>
     </Fragment>
   );

@@ -4,7 +4,7 @@ import { Colours } from "../constants";
 import RowSelector from "./Grid/RowSelector";
 import { Category } from "../constants";
 import { dataParser } from "../dataParser";
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, Grid } from "@material-ui/core";
 
 interface ISettingsState {
   metric: string;
@@ -297,41 +297,74 @@ class Main extends React.Component<{}, IState> {
 
     return (
       <Fragment>
-        <GridSettings
-          metric={metric}
-          open={open}
-          collapsed={collapsed}
-          singleLine={singleLine}
-          tempColour={tempColour}
-          precipColour={precipColour}
-          rainColour={rainColour}
-          snowColour={snowColour}
-          humidColour={humidColour}
-          unitPrecipDays={unitPrecipDays}
-          unitRainDays={unitRainDays}
-          unitSnowDays={unitSnowDays}
-          onChange={this.onChange}
-        />
+        <Grid container style={{ marginLeft: "20px", marginRight: "20px" }}>
+          <Grid item xs={12}>
+            <GridSettings
+              metric={metric}
+              open={open}
+              collapsed={collapsed}
+              singleLine={singleLine}
+              tempColour={tempColour}
+              precipColour={precipColour}
+              rainColour={rainColour}
+              snowColour={snowColour}
+              humidColour={humidColour}
+              unitPrecipDays={unitPrecipDays}
+              unitRainDays={unitRainDays}
+              unitSnowDays={unitSnowDays}
+              onChange={this.onChange}
+            />
+            <br />
+          </Grid>
+          <Grid item xs={12}>
+            <RowSelector
+              rows={data}
+              onChange={this.changeRowbox}
+              selectAllChecks={this.selectAllChecks}
+              selectNone={this.selectNone}
+            />
+          </Grid>
+        </Grid>
         <br />
-        <RowSelector
-          rows={data}
-          onChange={this.changeRowbox}
-          selectAllChecks={this.selectAllChecks}
-          selectNone={this.selectNone}
-        />
         <br />
-        <Button onClick={this.generate}>Generate Template</Button>
-        <br />
-        <TextField
-          id="output"
-          multiline
-          variant="outlined"
-          rowsMax="20"
-          value={output}
-          fullWidth
-        />
-        <br />
-        <Button onClick={this.copyText}>Copy To Clipboard</Button>
+        <Grid
+          container
+          justify="center"
+          style={{ marginLeft: "auto", marginRight: "auto" }}
+        >
+          <Grid item xs={3}>
+            <Button
+              style={{ backgroundColor: "green", color: "white" }}
+              onClick={this.generate}
+            >
+              Generate Template
+            </Button>{" "}
+          </Grid>
+          <Grid item xs={3} />
+          <Grid item xs={3}>
+            <Button
+              style={{ backgroundColor: "teal", color: "white" }}
+              onClick={this.copyText}
+            >
+              Copy To Clipboard
+            </Button>
+          </Grid>
+          <Grid item xs={12}>
+            <br />
+            <br />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
+              id="output"
+              multiline
+              variant="outlined"
+              rowsMax="30"
+              value={output}
+              fullWidth
+            />
+            <br />
+          </Grid>
+        </Grid>
       </Fragment>
     );
   }

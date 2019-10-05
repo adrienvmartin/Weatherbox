@@ -3,7 +3,7 @@ import Switches from "./Switches";
 import ColourSettings from "./ColourSettings";
 import UnitDays from "./UnitDays";
 import { Colours } from "../../constants";
-import { Paper } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 
 interface IProps {
   metric: string;
@@ -21,25 +21,26 @@ interface IProps {
   onChange: (e) => any;
 }
 
-const GridSettings: React.FC<IProps> = (props) => {
-    const {
-      metric,
-      open,
-      collapsed,
-      singleLine,
-      tempColour,
-      precipColour,
-      rainColour,
-      snowColour,
-      humidColour,
-      unitPrecipDays,
-      unitRainDays,
-      unitSnowDays,
-      onChange,
-    } = props;
-    return (
-      <Fragment>
-        <Paper>
+const GridSettings: React.FC<IProps> = props => {
+  const {
+    metric,
+    open,
+    collapsed,
+    singleLine,
+    tempColour,
+    precipColour,
+    rainColour,
+    snowColour,
+    humidColour,
+    unitPrecipDays,
+    unitRainDays,
+    unitSnowDays,
+    onChange
+  } = props;
+  return (
+    <Fragment>
+      <Grid container justify="center" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
+        <Grid item xs={6}>
           <Switches
             metric={metric}
             open={open}
@@ -47,9 +48,17 @@ const GridSettings: React.FC<IProps> = (props) => {
             singleLine={singleLine}
             onChange={onChange}
           />
-        </Paper>
+        </Grid>
         <br />
-        <Paper>
+        <Grid item xs={6}>
+          <UnitDays
+            unitPrecipDays={unitPrecipDays}
+            unitRainDays={unitRainDays}
+            unitSnowDays={unitSnowDays}
+            onChange={onChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
           <ColourSettings
             tempColour={tempColour}
             precipColour={precipColour}
@@ -58,18 +67,11 @@ const GridSettings: React.FC<IProps> = (props) => {
             humidColour={humidColour}
             onChange={onChange}
           />
-        </Paper>
+        </Grid>
         <br />
-        <Paper>
-          <UnitDays
-            unitPrecipDays={unitPrecipDays}
-            unitRainDays={unitRainDays}
-            unitSnowDays={unitSnowDays}
-            onChange={onChange}
-          />
-        </Paper>
-      </Fragment>
-    );
+      </Grid>
+    </Fragment>
+  );
 };
 
 export default GridSettings;

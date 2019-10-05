@@ -2,8 +2,6 @@ import React, { Fragment } from "react";
 import {
   TextField,
   Grid,
-  FormControl,
-  FormControlLabel
 } from "@material-ui/core";
 
 interface IProps {

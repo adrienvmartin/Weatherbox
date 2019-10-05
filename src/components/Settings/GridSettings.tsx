@@ -40,7 +40,7 @@ const GridSettings: React.FC<IProps> = props => {
   return (
     <Fragment>
       <Grid container justify="center" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-        <Grid item xs={6}>
+        <Grid item xs={12}>
           <Switches
             metric={metric}
             open={open}
@@ -50,14 +50,6 @@ const GridSettings: React.FC<IProps> = props => {
           />
         </Grid>
         <br />
-        <Grid item xs={6}>
-          <UnitDays
-            unitPrecipDays={unitPrecipDays}
-            unitRainDays={unitRainDays}
-            unitSnowDays={unitSnowDays}
-            onChange={onChange}
-          />
-        </Grid>
         <Grid item xs={12}>
           <ColourSettings
             tempColour={tempColour}
@@ -65,6 +57,14 @@ const GridSettings: React.FC<IProps> = props => {
             rainColour={rainColour}
             snowColour={snowColour}
             humidColour={humidColour}
+            onChange={onChange}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <UnitDays
+            unitPrecipDays={unitPrecipDays}
+            unitRainDays={unitRainDays}
+            unitSnowDays={unitSnowDays}
             onChange={onChange}
           />
         </Grid>

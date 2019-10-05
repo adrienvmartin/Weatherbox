@@ -22,10 +22,10 @@ const Switches: React.FC<IProps> = props => {
     <Fragment>
       <h1>Basic Settings</h1>
       <div className="switches">
-        <Grid container style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-          <Grid item xs={3}>
+        <Grid container spacing={0} style={{ marginLeft: 'auto', marginRight: 'auto' }} alignItems="center" justify="center" >
+          <Grid item xs={2}>
             <FormControl component="fieldset">
-              <FormLabel component="legend">Units?</FormLabel>
+              <FormLabel component="legend">Unit Type</FormLabel>
               <RadioGroup
                 aria-label="metric"
                 name="metric"
@@ -45,7 +45,7 @@ const Switches: React.FC<IProps> = props => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Open?</FormLabel>
               <RadioGroup
@@ -67,7 +67,7 @@ const Switches: React.FC<IProps> = props => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Collapsed?</FormLabel>
               <RadioGroup
@@ -89,7 +89,7 @@ const Switches: React.FC<IProps> = props => {
               </RadioGroup>
             </FormControl>
           </Grid>
-          <Grid item xs={3}>
+          <Grid item xs={2}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Single Line?</FormLabel>
               <RadioGroup

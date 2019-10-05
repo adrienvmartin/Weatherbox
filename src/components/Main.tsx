@@ -372,7 +372,7 @@ class Main extends React.Component<{}, IState> {
               id="output"
               multiline
               variant="outlined"
-              rowsMax="30"
+              rows="30"
               value={output}
               fullWidth
             />

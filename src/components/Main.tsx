@@ -268,6 +268,13 @@ class Main extends React.Component<{}, IState> {
     }));
   };
 
+  public clearTemplate = () => {
+    this.setState(state => ({
+      ...state,
+      output: ""
+    }));
+  };
+
   public copyText = () => {
     const copyText = document.getElementById("output");
     // @ts-ignore
@@ -340,13 +347,20 @@ class Main extends React.Component<{}, IState> {
               Generate Template
             </Button>{" "}
           </Grid>
-          <Grid item xs={3} />
           <Grid item xs={3}>
             <Button
               style={{ backgroundColor: "teal", color: "white" }}
               onClick={this.copyText}
             >
               Copy To Clipboard
+            </Button>
+          </Grid>
+          <Grid item xs={3}>
+            <Button
+              style={{ backgroundColor: "red", color: "white" }}
+              onClick={this.clearTemplate}
+            >
+              Clear Template Code
             </Button>
           </Grid>
           <Grid item xs={12}>

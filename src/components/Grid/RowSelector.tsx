@@ -102,7 +102,7 @@ const RowSelector: React.FC<IProps> = props => {
                   value={6}
                 />
               }
-              label="Record low"
+              label="Mean minimum"
             />
             <FormControlLabel
               control={
@@ -112,7 +112,7 @@ const RowSelector: React.FC<IProps> = props => {
                   value={7}
                 />
               }
-              label="Mean minimum"
+              label="Record low"
             />
             <FormControlLabel
               control={

@@ -27,7 +27,8 @@ export const dataParser = state => {
   const collapsedSettings = collapsed === "true" ? `|collapsed = yes \n` : "";
   const openSettings = open === "true" ? `|open = yes \n` : "";
   const singleLineSettings =
-    singleLine === "true" ? `|singleLine = yes \n` : "";
+    singleLine === "true" ? `|single line = yes \n` : "";
+  const metricSettings = metric === "true" ? '|metric first = yes \n' : "";
 
   const precipStatement =
     precipColour === NONE ? "" : `|precipitation colour = ${precipColour}\n`;
@@ -44,7 +45,7 @@ export const dataParser = state => {
   const rainUnits = `|unit rain days = ${unitRainDays} \n`;
   const snowUnits = `|unit snow days = ${unitSnowDays} \n`;
 
-  const mainSettings = `${location}${collapsedSettings}${openSettings}${singleLineSettings}${tempStatement}${precipStatement}${rainStatement}${snowStatement}${humidStatement}${precipUnits}${rainUnits}${snowUnits}`;
+  const mainSettings = `${location}${metricSettings}${collapsedSettings}${openSettings}${singleLineSettings}${tempStatement}${precipStatement}${rainStatement}${snowStatement}${humidStatement}${precipUnits}${rainUnits}${snowUnits}`;
 
   const metricTemp = metric === "true" ? "C" : "F";
   const metricPrecip = metric === "true" ? "mm" : "inch";

@@ -6,6 +6,7 @@ import { Colours } from "../../constants";
 import { Grid } from "@material-ui/core";
 
 interface IProps {
+  location: string;
   metric: string;
   collapsed: string;
   open: string;
@@ -23,6 +24,7 @@ interface IProps {
 
 const GridSettings: React.FC<IProps> = props => {
   const {
+    location,
     metric,
     open,
     collapsed,
@@ -42,6 +44,7 @@ const GridSettings: React.FC<IProps> = props => {
       <Grid container justify="center" style={{ marginLeft: 'auto', marginRight: 'auto' }}>
         <Grid item xs={12}>
           <Switches
+            location={location}
             metric={metric}
             open={open}
             collapsed={collapsed}

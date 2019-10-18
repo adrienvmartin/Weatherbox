@@ -7,6 +7,7 @@ import { dataParser } from "../dataParser";
 import { TextField, Button, Grid } from "@material-ui/core";
 
 interface ISettingsState {
+  location: string;
   metric: string;
   collapsed: string;
   open: string;
@@ -53,6 +54,7 @@ const { STANDARD, BLUE, GREEN } = Colours;
 
 export const INITIAL_STATE: IState = {
   settings: {
+    location: '',
     metric: "true",
     collapsed: "false",
     open: "false",
@@ -286,6 +288,7 @@ class Main extends React.Component<{}, IState> {
     const { settings } = this.state;
 
     const {
+      location,
       metric,
       open,
       collapsed,
@@ -307,6 +310,7 @@ class Main extends React.Component<{}, IState> {
         <Grid container style={{ marginLeft: "20px", marginRight: "20px" }}>
           <Grid item xs={12}>
             <GridSettings
+              location={location}
               metric={metric}
               open={open}
               collapsed={collapsed}

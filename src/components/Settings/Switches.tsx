@@ -5,10 +5,12 @@ import {
   FormControl,
   FormLabel,
   FormControlLabel,
-  Grid
+  Grid,
+  TextField
 } from "@material-ui/core";
 
 interface IProps {
+  location: string;
   metric: string;
   open: string;
   collapsed: string;
@@ -17,12 +19,29 @@ interface IProps {
 }
 
 const Switches: React.FC<IProps> = props => {
-  const { metric, collapsed, open, singleLine, onChange } = props;
+  const { location, metric, collapsed, open, singleLine, onChange } = props;
   return (
     <Fragment>
       <h1>Basic Settings</h1>
       <div className="switches">
-        <Grid container spacing={0} style={{ marginLeft: 'auto', marginRight: 'auto' }} alignItems="center" justify="center" >
+        <Grid
+          container
+          spacing={0}
+          style={{ marginLeft: "auto", marginRight: "auto" }}
+          alignItems="center"
+          justify="center"
+        >
+          <Grid item xs={2}>
+            <FormControl component="fieldset">
+              <FormLabel component="legend">Location Name</FormLabel>
+              <TextField
+                aria-name="location"
+                name="location"
+                value={location}
+                onChange={onChange}
+              />
+            </FormControl>
+          </Grid>
           <Grid item xs={2}>
             <FormControl component="fieldset">
               <FormLabel component="legend">Unit Type</FormLabel>

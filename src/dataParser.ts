@@ -6,6 +6,7 @@ const { NONE, STANDARD } = Colours;
 
 export const dataParser = state => {
   const {
+    location,
     metric,
     collapsed,
     open,
@@ -22,8 +23,8 @@ export const dataParser = state => {
 
   const header = "{{Weather box";
   const footer = "}}";
-  const location = "|location = \n";
 
+  const locationSettings = `|location = ${location} \n`;
   const collapsedSettings = collapsed === "true" ? `|collapsed = yes \n` : "";
   const openSettings = open === "true" ? `|open = yes \n` : "";
   const singleLineSettings =
@@ -45,7 +46,7 @@ export const dataParser = state => {
   const rainUnits = `|unit rain days = ${unitRainDays} \n`;
   const snowUnits = `|unit snow days = ${unitSnowDays} \n`;
 
-  const mainSettings = `${location}${metricSettings}${collapsedSettings}${openSettings}${singleLineSettings}${tempStatement}${precipStatement}${rainStatement}${snowStatement}${humidStatement}${precipUnits}${rainUnits}${snowUnits}`;
+  const mainSettings = `${locationSettings}${metricSettings}${collapsedSettings}${openSettings}${singleLineSettings}${tempStatement}${precipStatement}${rainStatement}${snowStatement}${humidStatement}${precipUnits}${rainUnits}${snowUnits}`;
 
   const metricTemp = metric === "true" ? "C" : "F";
   const metricPrecip = metric === "true" ? "mm" : "inch";

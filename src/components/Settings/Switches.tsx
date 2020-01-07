@@ -35,7 +35,7 @@ const Switches: React.FC<IProps> = props => {
             <FormControl component="fieldset">
               <FormLabel component="legend">Location Name</FormLabel>
               <TextField
-                aria-name="location"
+                aria-label="location"
                 name="location"
                 value={location}
                 onChange={onChange}
